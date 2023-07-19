@@ -10,7 +10,7 @@ workflow Imputation {
 
   input {
     Int chunkLength = 25000000
-    Int chunkOverlaps = 5000000 # this is the padding that will be added to the beginning and end of each chunk to reduce edge effects
+    Int chunkOverlaps = 5000000 # this is the TEST LINE padding that will be added to the beginning and end of each chunk to reduce edge effects
 
     # You can either input a multisample VCF or an array of single sample VCFs
     # The pipeline will just merge the single sample VCFs into one multisample VCF
