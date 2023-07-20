@@ -92,16 +92,16 @@ task GenerateChunk {
     memory: "${memory_mb} MiB"
     cpu: cpu
   }
-  parameter_meta {
-    vcf: {
-      description: "vcf",
-      localization_optional: true
-    }
-    vcf_index: {
-      description: "vcf index",
-      localization_optional: true
-    }
-  }
+#  parameter_meta {
+#    vcf: {
+#      description: "vcf",
+#      localization_optional: true
+#    }
+#    vcf_index: {
+#      description: "vcf index",
+#      localization_optional: true
+#    }
+#  }
   output {
     File output_vcf = "~{basename}.vcf.gz"
     File output_vcf_index = "~{basename}.vcf.gz.tbi"
@@ -699,16 +699,16 @@ task SubsetVcfToRegion {
     cpu: cpu
   }
 
-  parameter_meta {
-    vcf: {
-       description: "vcf",
-       localization_optional: true
-     }
-    vcf_index: {
-       description: "vcf index",
-       localization_optional: true
-     }
-  }
+#  parameter_meta {
+#    vcf: {
+#       description: "vcf",
+#       localization_optional: true
+#     }
+#    vcf_index: {
+#       description: "vcf index",
+#       localization_optional: true
+#     }
+#  }
 
   output {
     File output_vcf = "~{output_basename}.vcf.gz"
@@ -780,12 +780,12 @@ task SelectVariantsByIds {
     Int memory_mb = 16000
     Int disk_size_gb = ceil(1.2*size(vcf, "GiB")) + 100
   }
-  parameter_meta {
-    vcf: {
-      description: "vcf",
-      localization_optional: true
-    }
-  }
+#  parameter_meta {
+#    vcf: {
+#      description: "vcf",
+#      localization_optional: true
+#    }
+#  }
   Int command_mem = memory_mb - 1000
   Int max_heap = memory_mb - 500
 
