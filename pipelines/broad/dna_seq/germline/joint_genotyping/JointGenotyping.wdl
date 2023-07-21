@@ -200,7 +200,7 @@ workflow JointGenotyping {
   }
 
   String allele_specific_extra_args = if allele_specific_annotations then "--use-allele-specific-annotations" else ""
-  String calibration_extra_args = " --snp-calibration-sensitivity-threshold 0.997 --indel-calibration-sensitivity-threshold 0.99 "
+  String calibration_extra_args = " --snp-calibration-sensitivity-threshold " + snp_filter_level + " --indel-calibration-sensitivity-threshold " + indel_filter_level + " "
 
   call Filtering.JointVcfFiltering as TrainAndApplyFilteringModel {
     input:
