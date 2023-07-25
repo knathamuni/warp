@@ -17,7 +17,7 @@ task CalculateChromosomeLength {
   runtime {
     docker: ubuntu_docker
     disks: "local-disk ${disk_size_gb} HDD"
-    disk: "${disk_size_gb} GB"
+    disk: "50 GB"
     memory: "${memory_mb} MiB"
     cpu: cpu
   }
@@ -45,7 +45,7 @@ task GetMissingContigList {
   runtime {
     docker: ubuntu_docker
     disks: "local-disk ${disk_size_gb} HDD"
-    disk: "${disk_size_gb} GB"
+    disk: "50 GB"
     memory: "${memory_mb} MiB"
     cpu: cpu
   }
@@ -88,7 +88,7 @@ task GenerateChunk {
   runtime {
     docker: gatk_docker
     disks: "local-disk ${disk_size_gb} HDD"
-    disk: disk_size_gb + " GB"
+    disk: "50 GB"
     memory: "${memory_mb} MiB"
     cpu: cpu
   }
@@ -136,7 +136,7 @@ task CountVariantsInChunks {
   runtime {
     docker: gatk_docker
     disks: "local-disk ${disk_size_gb} HDD"
-    disk: "${disk_size_gb} GB"
+    disk: "50 GB"
     memory: "${memory_mb} MiB"
     cpu: cpu
   }
@@ -176,7 +176,7 @@ task CheckChunks {
   runtime {
     docker: bcftools_docker
     disks: "local-disk ${disk_size_gb} HDD"
-    disk: "${disk_size_gb} GB"
+    disk: "50 GB"
     memory: "${memory_mb} MiB"
     cpu: cpu
   }
@@ -215,7 +215,7 @@ task PhaseVariantsEagle {
   runtime {
     docker: eagle_docker
     disks: "local-disk ${disk_size_gb} HDD"
-    disk: "${disk_size_gb} GB"
+    disk: "50 GB"
     memory: "${memory_mb} MiB"
     cpu: cpu
   }
@@ -262,7 +262,7 @@ task Minimac4 {
   runtime {
     docker: minimac4_docker
     disks: "local-disk ${disk_size_gb} HDD"
-    disk: "${disk_size_gb} GB"
+    disk: "50 GB"
     memory: "${memory_mb} MiB"
     cpu: cpu
   }
@@ -297,7 +297,7 @@ task GatherVcfs {
   runtime {
     docker: gatk_docker
     disks: "local-disk ${disk_size_gb} HDD"
-    disk: "${disk_size_gb} GB"
+    disk: "50 GB"
     memory: "${memory_mb} MiB"
     cpu: cpu
   }
@@ -329,7 +329,7 @@ task ReplaceHeader {
   runtime {
     docker: bcftools_docker
     disks: "local-disk ${disk_size_gb} HDD"
-    disk: "${disk_size_gb} GB"
+    disk: "50 GB"
   }
 
   output {
@@ -365,7 +365,7 @@ task UpdateHeader {
   runtime {
     docker: gatk_docker
     disks: "local-disk ${disk_size_gb} HDD"
-    disk: "${disk_size_gb} GB"
+    disk: "50 GB"
     memory: "${memory_mb} MiB"
     cpu: cpu
   }
@@ -400,7 +400,7 @@ task RemoveSymbolicAlleles {
   runtime {
     docker: gatk_docker
     disks: "local-disk ${disk_size_gb} HDD"
-    disk: "${disk_size_gb} GB"
+    disk: "50 GB"
     memory: "${memory_mb} MiB"
     cpu: cpu
   }
@@ -430,7 +430,7 @@ task SeparateMultiallelics {
   runtime {
     docker: bcftools_docker
     disks: "local-disk ${disk_size_gb} HDD"
-    disk: "${disk_size_gb} GB"
+    disk: "50 GB"
     memory: "${memory_mb} MiB"
     cpu: cpu
   }
@@ -462,7 +462,7 @@ task OptionalQCSites {
   runtime {
     docker: bcftools_vcftools_docker
     disks: "local-disk ${disk_size_gb} HDD"
-    disk: "${disk_size_gb} GB"
+    disk: "50 GB"
     memory: "${memory_mb} MiB"
     cpu: cpu
   }
@@ -504,7 +504,7 @@ task MergeSingleSampleVcfs {
   runtime {
     docker: bcftools_docker
     disks: "local-disk ${disk_size_gb} HDD"
-    disk: "${disk_size_gb} GB"
+    disk: "50 GB"
     memory: "${memory_mb} MiB"
     cpu: cpu
   }
@@ -529,7 +529,7 @@ task CountSamples {
   runtime {
     docker: bcftools_docker
     disks: "local-disk ${disk_size_gb} HDD"
-    disk: "${disk_size_gb} GB"
+    disk: "50 GB"
     memory: "${memory_mb} MiB"
     cpu: cpu
   }
@@ -573,7 +573,7 @@ task AggregateImputationQCMetrics {
   runtime {
     docker: rtidyverse_docker
     disks : "local-disk ${disk_size_gb} HDD"
-    disk: "${disk_size_gb} GB"
+    disk: "50 GB"
     memory: "${memory_mb} MiB"
     cpu: cpu
     preemptible : 3
@@ -614,7 +614,7 @@ task StoreChunksInfo {
   runtime {
     docker: rtidyverse_docker
     disks : "local-disk ${disk_size_gb} HDD"
-    disk: "${disk_size_gb} GB"
+    disk: "50 GB"
     memory: "${memory_mb} MiB"
     cpu: cpu
     preemptible : 3
@@ -653,7 +653,7 @@ task MergeImputationQCMetrics {
   runtime {
     docker: rtidyverse_docker
     disks : "local-disk ${disk_size_gb} HDD"
-    disk: "${disk_size_gb} GB"
+    disk: "50 GB"
     memory: "${memory_mb} MiB"
     cpu: cpu
     preemptible : 3
@@ -694,7 +694,7 @@ task SubsetVcfToRegion {
   runtime {
     docker: gatk_docker
     disks: "local-disk ${disk_size_gb} HDD"
-    disk: "200 GB"
+    disk: "50 GB"
     memory: "${memory_mb} MiB"
     cpu: cpu
   }
@@ -734,7 +734,7 @@ task SetIDs {
   runtime {
     docker: bcftools_docker
     disks: "local-disk ${disk_size_gb} HDD"
-    disk: "${disk_size_gb} GB"
+    disk: "50 GB"
     memory: "${memory_mb} MiB"
     cpu: cpu
   }
@@ -763,7 +763,7 @@ task ExtractIDs {
   runtime {
     docker: bcftools_docker
     disks: "local-disk ${disk_size_gb} HDD"
-    disk: "${disk_size_gb} GB"
+    disk: "50 GB"
     memory: "${memory_mb} MiB"
     cpu: cpu
   }
@@ -799,7 +799,7 @@ task SelectVariantsByIds {
   runtime {
     docker: gatk_docker
     disks: "local-disk ${disk_size_gb} SSD"
-    disk: "${disk_size_gb} GB"
+    disk: "50 GB"
     memory: "${memory_mb} MiB"
     cpu: cpu
   }
@@ -828,7 +828,7 @@ task RemoveAnnotations {
   runtime {
     docker: bcftools_docker
     disks: "local-disk ${disk_size_gb} HDD"
-    disk: "${disk_size_gb} GB"
+    disk: "50 GB"
     memory: "${memory_mb} MiB"
     cpu: cpu
   }
@@ -860,7 +860,7 @@ task InterleaveVariants {
   runtime {
     docker: gatk_docker
     disks: "local-disk ${disk_size_gb} SSD"
-    disk: "${disk_size_gb} GB"
+    disk: "50 GB"
     memory: "${memory_mb} MiB"
     cpu: cpu
   }
@@ -886,7 +886,7 @@ task FindSitesUniqueToFileTwoOnly {
   runtime {
     docker: ubuntu_docker
     disks: "local-disk ${disk_size_gb} HDD"
-    disk: "${disk_size_gb} GB"
+    disk: "50 GB"
     memory: "${memory_mb} MiB"
     cpu: cpu
   }
@@ -916,7 +916,7 @@ task SplitMultiSampleVcf {
   runtime {
     docker: bcftools_docker
     disks: "local-disk ${disk_size_gb} SSD"
-    disk: "${disk_size_gb} GB"
+    disk: "50 GB"
     memory: "${memory_mb} MiB"
     cpu: cpu
   }
