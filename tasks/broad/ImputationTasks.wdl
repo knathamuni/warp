@@ -88,7 +88,7 @@ task GenerateChunk {
   runtime {
     docker: gatk_docker
     disks: "local-disk ${disk_size_gb} HDD"
-    disk: "${disk_size_gb} GB"
+    disk: disk_size_gb + " GB"
     memory: "${memory_mb} MiB"
     cpu: cpu
   }
@@ -694,7 +694,7 @@ task SubsetVcfToRegion {
   runtime {
     docker: gatk_docker
     disks: "local-disk ${disk_size_gb} HDD"
-    disk: "${disk_size_gb} GB"
+    disk: "200 GB"
     memory: "${memory_mb} MiB"
     cpu: cpu
   }
