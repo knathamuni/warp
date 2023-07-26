@@ -772,6 +772,7 @@ task ExtractIDs {
 task SelectVariantsByIds {
   input {
     File vcf
+    File vcf_index
     File ids
     String basename
 
@@ -785,6 +786,11 @@ task SelectVariantsByIds {
 #      description: "vcf",
 #      localization_optional: true
 #    }
+#  }
+#    vcf_index: {
+#       description: "vcf index",
+#       localization_optional: true
+#     }
 #  }
   Int command_mem = memory_mb - 1000
   Int max_heap = memory_mb - 500
