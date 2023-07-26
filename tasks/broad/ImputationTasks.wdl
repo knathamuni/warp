@@ -786,9 +786,8 @@ task SelectVariantsByIds {
       description: "vcf",
       localization_optional: true
     }
-  }
     vcf_index: {
-       description: "vcf index",
+       description: "vcf_index",
        localization_optional: true
      }
   }
