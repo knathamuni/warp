@@ -25,7 +25,6 @@ task WriteGreeting {
     }
     runtime {
         docker: ubuntu_docker
-        disks: "local-disk ${disk_size_gb} HDD"
         disk: "50 GB"
         memory: "2000 MiB"
         cpu: 1
