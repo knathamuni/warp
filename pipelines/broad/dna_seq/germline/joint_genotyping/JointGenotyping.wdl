@@ -77,6 +77,11 @@ workflow JointGenotyping {
   Array[Array[String]] sample_name_map_lines = read_tsv(sample_name_map)
   Int num_gvcfs = length(sample_name_map_lines)
 
+  Array[Array[String]] sample_name_map_lines_t = transpose(sample_name_map_lines)
+  Array[String] sample_names_from_map = sample_name_map_lines_t[0]
+  Array[File] gvcf_paths_from_map = sample_name_map_lines_t[1]
+  Array[File] gvcf_index_paths_from_map = sample_name_map_lines_t[2]
+
   # Make a 2.5:1 interval number to samples in callset ratio interval list.
   # We allow overriding the behavior by specifying the desired number of vcfs
   # to scatter over for testing / special requests.
@@ -116,7 +121,9 @@ workflow JointGenotyping {
     # the Hellbender (GATK engine) team!
     call Tasks.ImportGVCFs {
       input:
-        sample_name_map = sample_name_map,
+        sample_names = sample_names_from_map,
+        gvcf_files = gvcf_paths_from_map,
+        gvcf_index_files = gvcf_index_paths_from_map,
         interval = unpadded_intervals[idx],
         ref_fasta = ref_fasta,
         ref_fasta_index = ref_fasta_index,
