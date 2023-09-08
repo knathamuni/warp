@@ -1,3 +1,9 @@
+# 3.1.12
+2023-09-08 (Date of Last Commit)
+
+* Updated GATK for Reblock task to version FILL_IN
+* Added options to Reblock task to remove annotations and move filters to genotype level
+
 # 3.1.11
 2023-08-23 (Date of Last Commit)
 * Updated VerifyBamID docker image in BamProcessing.wdl to fix security vulnerabilities, this update has no effect on this pipeline.  

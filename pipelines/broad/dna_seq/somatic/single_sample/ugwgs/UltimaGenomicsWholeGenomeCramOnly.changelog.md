@@ -1,3 +1,8 @@
+# 1.0.10
+2023-09-08 (Date of Last Commit)
+
+* Updates to Reblock task. This update has no effect on this pipeline.
+
 # 1.0.9
 2023-08-16 (Date of Last Commit)
 
