@@ -5,9 +5,11 @@ workflow HelloWorld {
         File input_file
     }
 
-    call WriteGreeting {
-        input:
-            input_file = input_file
+    scatter (i in range(5)) {
+        call WriteGreeting {
+            input:
+                input_file = input_file
+        }
     }
 
     output {
