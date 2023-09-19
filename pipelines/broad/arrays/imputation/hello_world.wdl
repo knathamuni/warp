@@ -3,9 +3,10 @@ version 1.0
 workflow HelloWorld {
     input {
         File input_file
+        Int scatter_num
     }
 
-    scatter (i in range(5)) {
+    scatter (i in range(scatter_num)) {
         call WriteGreeting {
             input:
                 input_file = input_file
@@ -13,7 +14,7 @@ workflow HelloWorld {
     }
 
     output {
-        File output_file = WriteGreeting.output_greeting
+        Array[File] output_file = WriteGreeting.output_greeting
     }
 }
 
