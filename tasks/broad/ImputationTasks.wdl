@@ -20,7 +20,7 @@ task CalculateChromosomeLength {
     disk: "${disk_size_gb} GB"
     memory: "${memory_mb} MiB"
     cpu: cpu
-    maxRetries: 2
+    #maxRetries: 2
   }
   output {
     Int chrom_length = read_int(stdout())
@@ -49,7 +49,7 @@ task GetMissingContigList {
     disk: "${disk_size_gb} GB"
     memory: "${memory_mb} MiB"
     cpu: cpu
-    maxRetries: 2
+    #maxRetries: 2
   }
 
   output {
@@ -93,7 +93,7 @@ task GenerateChunk {
     disk: "${disk_size_gb} GB"
     memory: "${memory_mb} MiB"
     cpu: cpu
-    maxRetries: 2
+    #maxRetries: 2
   }
   parameter_meta {
     vcf: {
@@ -142,7 +142,7 @@ task CountVariantsInChunks {
     disk: "${disk_size_gb} GB"
     memory: "${memory_mb} MiB"
     cpu: cpu
-    maxRetries: 2
+    #maxRetries: 2
   }
 }
 
@@ -183,7 +183,7 @@ task CheckChunks {
     disk: "${disk_size_gb} GB"
     memory: "${memory_mb} MiB"
     cpu: cpu
-    maxRetries: 2
+    #maxRetries: 2
   }
 }
 
@@ -223,7 +223,7 @@ task PhaseVariantsEagle {
     disk: "${disk_size_gb} GB"
     memory: "${memory_mb} MiB"
     cpu: cpu
-    maxRetries: 2
+    #maxRetries: 2
   }
 }
 
@@ -271,7 +271,7 @@ task Minimac4 {
     disk: "${disk_size_gb} GB"
     memory: "${memory_mb} MiB"
     cpu: cpu
-    maxRetries: 2
+    #maxRetries: 2
   }
 }
 
@@ -307,7 +307,7 @@ task GatherVcfs {
     disk: "${disk_size_gb} GB"
     memory: "${memory_mb} MiB"
     cpu: cpu
-    maxRetries: 2
+    #maxRetries: 2
   }
   output {
     File output_vcf = "~{output_vcf_basename}.vcf.gz"
@@ -338,7 +338,7 @@ task ReplaceHeader {
     docker: bcftools_docker
     disks: "local-disk ${disk_size_gb} HDD"
     disk: "${disk_size_gb} GB"
-    maxRetries: 2
+    #maxRetries: 2
   }
 
   output {
@@ -377,7 +377,7 @@ task UpdateHeader {
     disk: "${disk_size_gb} GB"
     memory: "${memory_mb} MiB"
     cpu: cpu
-    maxRetries: 2
+    #maxRetries: 2
   }
   output {
     File output_vcf = "~{basename}.vcf.gz"
@@ -413,7 +413,7 @@ task RemoveSymbolicAlleles {
     disk: "${disk_size_gb} GB"
     memory: "${memory_mb} MiB"
     cpu: cpu
-    maxRetries: 2
+    #maxRetries: 2
   }
 }
 
@@ -444,7 +444,7 @@ task SeparateMultiallelics {
     disk: "${disk_size_gb} GB"
     memory: "${memory_mb} MiB"
     cpu: cpu
-    maxRetries: 2
+    #maxRetries: 2
   }
 }
 
@@ -477,7 +477,7 @@ task OptionalQCSites {
     disk: "${disk_size_gb} GB"
     memory: "${memory_mb} MiB"
     cpu: cpu
-    maxRetries: 2
+    #maxRetries: 2
   }
   output {
     File output_vcf = "~{output_vcf_basename}.vcf.gz"
@@ -520,7 +520,7 @@ task MergeSingleSampleVcfs {
     disk: "${disk_size_gb} GB"
     memory: "${memory_mb} MiB"
     cpu: cpu
-    maxRetries: 2
+    #maxRetries: 2
   }
   output {
     File output_vcf = "~{output_vcf_basename}.vcf.gz"
@@ -546,7 +546,7 @@ task CountSamples {
     disk: "${disk_size_gb} GB"
     memory: "${memory_mb} MiB"
     cpu: cpu
-    maxRetries: 2
+    #maxRetries: 2
   }
   output {
     Int nSamples = read_int(stdout())
@@ -592,7 +592,7 @@ task AggregateImputationQCMetrics {
     memory: "${memory_mb} MiB"
     cpu: cpu
     preemptible : 3
-    maxRetries: 2
+    #maxRetries: 2
   }
   output {
     File aggregated_metrics = "~{basename}_aggregated_imputation_metrics.tsv"
@@ -634,7 +634,7 @@ task StoreChunksInfo {
     memory: "${memory_mb} MiB"
     cpu: cpu
     preemptible : 3
-    maxRetries: 2
+    #maxRetries: 2
   }
   output {
     File chunks_info = "~{basename}_chunk_info.tsv"
@@ -674,7 +674,7 @@ task MergeImputationQCMetrics {
     memory: "${memory_mb} MiB"
     cpu: cpu
     preemptible : 3
-    maxRetries: 2
+    #maxRetries: 2
   }
   output {
     File aggregated_metrics = "~{basename}_aggregated_imputation_metrics.tsv"
@@ -715,7 +715,7 @@ task SubsetVcfToRegion {
     disk: "${disk_size_gb} GB"
     memory: "${memory_mb} MiB"
     cpu: cpu
-    maxRetries: 2
+    #maxRetries: 2
   }
 
   parameter_meta {
@@ -756,7 +756,7 @@ task SetIDs {
     disk: "${disk_size_gb} GB"
     memory: "${memory_mb} MiB"
     cpu: cpu
-    maxRetries: 2
+    #maxRetries: 2
   }
   output {
     File output_vcf = "~{output_basename}.vcf.gz"
@@ -786,7 +786,7 @@ task ExtractIDs {
     disk: "${disk_size_gb} GB"
     memory: "${memory_mb} MiB"
     cpu: cpu
-    maxRetries: 2
+    #maxRetries: 2
   }
 }
 
@@ -828,7 +828,7 @@ task SelectVariantsByIds {
     disk: "${disk_size_gb} GB"
     memory: "${memory_mb} MiB"
     cpu: cpu
-    maxRetries: 2
+    #maxRetries: 2
   }
   output {
     File output_vcf = "~{basename}.vcf.gz"
@@ -858,7 +858,7 @@ task RemoveAnnotations {
     disk: "${disk_size_gb} GB"
     memory: "${memory_mb} MiB"
     cpu: cpu
-    maxRetries: 2
+    #maxRetries: 2
   }
   output {
     File output_vcf = "~{basename}.vcf.gz"
@@ -891,7 +891,7 @@ task InterleaveVariants {
     disk: "${disk_size_gb} GB"
     memory: "${memory_mb} MiB"
     cpu: cpu
-    maxRetries: 2
+    #maxRetries: 2
   }
   output {
     File output_vcf = "~{basename}.vcf.gz"
@@ -918,7 +918,7 @@ task FindSitesUniqueToFileTwoOnly {
     disk: "${disk_size_gb} GB"
     memory: "${memory_mb} MiB"
     cpu: cpu
-    maxRetries: 2
+    #maxRetries: 2
   }
   output {
     File missing_sites = "missing_sites.ids"
@@ -949,7 +949,7 @@ task SplitMultiSampleVcf {
     disk: "${disk_size_gb} GB"
     memory: "${memory_mb} MiB"
     cpu: cpu
-    maxRetries: 2
+    #maxRetries: 2
   }
   output {
     Array[File] single_sample_vcfs = glob("out_dir/*.vcf.gz")
