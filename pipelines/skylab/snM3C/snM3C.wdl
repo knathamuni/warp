@@ -187,8 +187,8 @@ task Mapping {
     # move outputs into /cromwell_root/
     #mv /cromwell_root/group0/MappingSummary.csv.gz /cromwell_root/~{plate_id}_MappingSummary.csv.gz
 
-    #cd /cromwell_root/group0/allc
-    #tar -zcvf ~{plate_id}_allc_files.tar.gz *
+    cd /cromwell_root/group0/allc
+    tar -zcvf ~{plate_id}_allc_files.tar.gz *
     #mv ~{plate_id}_allc_files.tar.gz /cromwell_root/
     #cd ../allc-CGN
     #tar -zcvf ~{plate_id}_allc-CGN_files.tar.gz *
@@ -216,7 +216,7 @@ task Mapping {
     #File mappingSummary = "~{plate_id}_MappingSummary.csv.gz"
     File trimmed_files = "~{plate_id}.trimmed.fq.gz.tar"
     #File stats_files = "~{plate_id}.trimmed.stats.txt"
-    #File allcFiles = "~{plate_id}_allc_files.tar.gz"
+    File allcFiles = "~{plate_id}_allc_files.tar.gz"
     #File allc_CGNFiles = "~{plate_id}_allc-CGN_files.tar.gz"
     File bamFiles = "~{plate_id}.bam_files.tar.gz"
     #File detail_statsFiles = "~{plate_id}_detail_stats_files.tar.gz"
