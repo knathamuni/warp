@@ -190,9 +190,9 @@ task Mapping {
     cd /cromwell_root/group0/allc
     tar -zcvf ~{plate_id}_allc_files.tar.gz *
     mv ~{plate_id}_allc_files.tar.gz /cromwell_root/
-    #cd ../allc-CGN
-    #tar -zcvf ~{plate_id}_allc-CGN_files.tar.gz *
-    #mv ~{plate_id}_allc-CGN_files.tar.gz /cromwell_root/
+    cd ../allc-CGN
+    tar -zcvf ~{plate_id}_allc-CGN_files.tar.gz *
+    mv ~{plate_id}_allc-CGN_files.tar.gz /cromwell_root/
     #cd ../bam
     #tar -zcvf ~{plate_id}_bam_files.tar.gz *
     #mv ~{plate_id}_bam_files.tar.gz /cromwell_root/
