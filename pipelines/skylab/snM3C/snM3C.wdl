@@ -217,7 +217,7 @@ task Mapping {
     File trimmed_files = "~{plate_id}.trimmed.fq.gz.tar"
     #File stats_files = "~{plate_id}.trimmed.stats.txt"
     File allcFiles = "~{plate_id}_allc_files.tar.gz"
-    #File allc_CGNFiles = "~{plate_id}_allc-CGN_files.tar.gz"
+    File allc_CGNFiles = "~{plate_id}_allc-CGN_files.tar.gz"
     File bamFiles = "~{plate_id}.bam_files.tar.gz"
     #File detail_statsFiles = "~{plate_id}_detail_stats_files.tar.gz"
     #File hicFiles = "~{plate_id}_hic_files.tar.gz"
