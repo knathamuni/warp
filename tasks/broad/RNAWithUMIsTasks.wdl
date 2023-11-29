@@ -278,7 +278,7 @@ task GetSampleName {
   input {
     File bam
 
-    String docker = "us.gcr.io/broad-gatk/gatk:4.3.0.0"
+    String docker = "us.gcr.io/broad-dsde-methods/broad-gatk-snapshots/gatk-remote-builds:mshand-e6e4deae3bd6d303a9e6b6ed849213744b3245a6-4.4.0.0-68-ge6e4deae3"
     Int cpu = 1
     Int memory_mb = 1000
     Int disk_size_gb = ceil(2.0 * size(bam, "GiB")) + 10
@@ -852,7 +852,7 @@ task CalculateContamination {
     File population_vcf
     File population_vcf_index
     # runtime
-    String docker = "us.gcr.io/broad-gatk/gatk:4.3.0.0"
+    String docker = "us.gcr.io/broad-dsde-methods/broad-gatk-snapshots/gatk-remote-builds:mshand-e6e4deae3bd6d303a9e6b6ed849213744b3245a6-4.4.0.0-68-ge6e4deae3"
     Int cpu = 1
     Int memory_mb = 8192
     Int disk_size_gb = 256

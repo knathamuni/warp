@@ -1008,7 +1008,7 @@ task AddReadGroup {
   >>>
 
   runtime {
-    docker: "us.gcr.io/broad-gatk/gatk:4.3.0.0"
+    docker: "us.gcr.io/broad-dsde-methods/broad-gatk-snapshots/gatk-remote-builds:mshand-e6e4deae3bd6d303a9e6b6ed849213744b3245a6-4.4.0.0-68-ge6e4deae3"
     # if the input size is less than 1 GB adjust to min input size of 1 GB
     # disks should be set to 2 * input file size
     disks: "local-disk " + ceil(2 * (if input_size < 1 then 1 else input_size)) + " HDD"
@@ -1063,7 +1063,7 @@ task MethylationTypeCaller {
   >>>
 
   runtime {
-    docker: "us.gcr.io/broad-gatk/gatk:4.3.0.0"
+    docker: "us.gcr.io/broad-dsde-methods/broad-gatk-snapshots/gatk-remote-builds:mshand-e6e4deae3bd6d303a9e6b6ed849213744b3245a6-4.4.0.0-68-ge6e4deae3"
     # if the input size is less than 1 GB adjust to min input size of 1 GB
     disks: "local-disk " + ceil(4.5 * (if input_size < 1 then 1 else input_size)) + " HDD"
     cpu: 1

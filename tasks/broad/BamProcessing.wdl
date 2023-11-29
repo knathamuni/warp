@@ -134,7 +134,7 @@ task BaseRecalibrator {
     File ref_fasta_index
     Int bqsr_scatter
     Int preemptible_tries
-    String gatk_docker = "us.gcr.io/broad-gatk/gatk:4.3.0.0"
+    String gatk_docker = "us.gcr.io/broad-dsde-methods/broad-gatk-snapshots/gatk-remote-builds:mshand-e6e4deae3bd6d303a9e6b6ed849213744b3245a6-4.4.0.0-68-ge6e4deae3"
   }
 
   Float ref_size = size(ref_fasta, "GiB") + size(ref_fasta_index, "GiB") + size(ref_dict, "GiB")
@@ -186,7 +186,7 @@ task ApplyBQSR {
     Int compression_level
     Int bqsr_scatter
     Int preemptible_tries
-    String gatk_docker = "us.gcr.io/broad-gatk/gatk:4.3.0.0"
+    String gatk_docker = "us.gcr.io/broad-dsde-methods/broad-gatk-snapshots/gatk-remote-builds:mshand-e6e4deae3bd6d303a9e6b6ed849213744b3245a6-4.4.0.0-68-ge6e4deae3"
     Int memory_multiplier = 1
     Int additional_disk = 20
     Boolean bin_base_qualities = true
@@ -245,7 +245,7 @@ task GatherBqsrReports {
     Array[File] input_bqsr_reports
     String output_report_filename
     Int preemptible_tries
-    String gatk_docker = "us.gcr.io/broad-gatk/gatk:4.3.0.0"
+    String gatk_docker = "us.gcr.io/broad-dsde-methods/broad-gatk-snapshots/gatk-remote-builds:mshand-e6e4deae3bd6d303a9e6b6ed849213744b3245a6-4.4.0.0-68-ge6e4deae3"
   }
 
   command {

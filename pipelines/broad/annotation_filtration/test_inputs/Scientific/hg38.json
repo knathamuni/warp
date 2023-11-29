@@ -8,6 +8,6 @@
   "AnnotationFiltration.ref_fasta_index": "gs://gcp-public-data--broad-references/hg38/v0/Homo_sapiens_assembly38.fasta.fai",
   "AnnotationFiltration.ref_dict": "gs://gcp-public-data--broad-references/hg38/v0/Homo_sapiens_assembly38.dict",
 
-  "AnnotationFiltration.gatk_docker": "us.gcr.io/broad-gatk/gatk:4.3.0.0",
+  "AnnotationFiltration.gatk_docker": "us.gcr.io/broad-dsde-methods/broad-gatk-snapshots/gatk-remote-builds:mshand-e6e4deae3bd6d303a9e6b6ed849213744b3245a6-4.4.0.0-68-ge6e4deae3",
   "AnnotationFiltration.custom_data_source_tar_gz": "gs://broad-public-datasets/funcotator/funcotator_dataSources.v1.6.20190124g.tar.gz"
 }

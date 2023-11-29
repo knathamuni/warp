@@ -326,7 +326,7 @@ task HardThresholdVCF {
     String output_basename
     String score_key
     Int disk_size
-    String docker = "us.gcr.io/broad-gatk/gatk:4.3.0.0"
+    String docker = "us.gcr.io/broad-dsde-methods/broad-gatk-snapshots/gatk-remote-builds:mshand-e6e4deae3bd6d303a9e6b6ed849213744b3245a6-4.4.0.0-68-ge6e4deae3"
   }
 
   command <<<
@@ -384,7 +384,7 @@ task AnnotateSampleVCF {
         File input_vcf_index
         String output_basename
         Int disk_size = ceil(size(input_vcf, "GB") * 2) + 50
-        String docker = "us.gcr.io/broad-gatk/gatk:4.3.0.0"
+        String docker = "us.gcr.io/broad-dsde-methods/broad-gatk-snapshots/gatk-remote-builds:mshand-e6e4deae3bd6d303a9e6b6ed849213744b3245a6-4.4.0.0-68-ge6e4deae3"
         File ref_fasta
         File ref_fasta_index
         File ref_dict
