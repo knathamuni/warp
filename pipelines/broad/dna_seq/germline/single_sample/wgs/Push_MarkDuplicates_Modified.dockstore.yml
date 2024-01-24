@@ -1,0 +1,7 @@
+version: 1.2
+workflows:
+  - subclass: WDL
+    primaryDescriptorPath: /pipelines/broad/dna_seq/germline/single_sample/wgs/MarkDuplicates_Modified.wdl
+    authors:
+      - name: Krithika Nathamuni
+        email: knathamu@broadinstitute.org
