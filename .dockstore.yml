@@ -122,3 +122,8 @@ workflows:
   - name: VariantCalling
     subclass: WDL
     primaryDescriptorPath: /pipelines/broad/dna_seq/germline/variant_calling/VariantCalling.wdl
+
+  - name: MergeCrams
+    subclass: WDL
+    primaryDescriptorPath: /pipelines/broad/dna_seq/germline/single_sample/wgs/MarkDuplicates_Modified.wdl
+
