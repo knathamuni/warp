@@ -69,20 +69,13 @@ workflow ReprocessFilesWorkflow {
   }
 
 
-
-    #call Utilities.SumFloats as SumFloats {
-        #input:
-           #sizes = SplitRG.current_mapped_size,
-            #preemptible_tries = papi_settings.preemptible_tries
-    #}
-
     scatter (file in input_files) {
         Float cram_size = size(file, "GiB")
         call UnmarkDuplicates {
             input:
                 input_bam = file,
                 output_bam_basename = "output_~{basename(file, '.bam')}",
-                total_input_size = SumFloats.total_size,
+                total_input_size = cram_size,
                 compression_level = compression_level,
                 preemptible_tries = preemptible_tries,
                 memory_multiplier = memory_multiplier,
@@ -101,10 +94,10 @@ workflow ReprocessFilesWorkflow {
     #Float agg_bam_size = size(FixSMTag.output_bam, "GiB")
     #Boolean data_too_large_for_preemptibles = agg_bam_size > gb_size_cutoff_for_preemptibles
 
-    call Utils.SumFloats as SumFloats {
-    input:
-      sizes = cram_size,
-      preemptible_tries = papi_settings.preemptible_tries
+    call Utilities.SumFloats as SumFloats {
+        input:
+            sizes = cram_size,
+            preemptible_tries = papi_settings.preemptible_tries
   }
 
     Boolean data_too_large_for_preemptibles = SumFloats.total_size > gb_size_cutoff_for_preemptibles
