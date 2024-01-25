@@ -20,7 +20,7 @@ workflow ReprocessFilesWorkflow {
         String sample_id
         String output_bam_basename
         String metrics_filename
-        Float total_input_size
+        Array[Float] sizes
         Int compression_level
         Int preemptible_tries
         String? read_name_regex
@@ -42,12 +42,12 @@ workflow ReprocessFilesWorkflow {
         Boolean perform_bqsr = true
         Boolean use_bwa_mem = true
         Boolean allow_empty_ref_alt = false
-        Array[File] sequence_grouping
-        Array[File] sequence_grouping_with_unmapped
+        #Array[File] sequence_grouping
+        #Array[File] sequence_grouping_with_unmapped
         File? fingerprint_genotypes_file
         File? fingerprint_genotypes_index
         File wgs_coverage_interval_list
-        Boolean run_dragen_mode_variant_calling_
+        Boolean? run_dragen_mode_variant_calling_
         Boolean use_spanning_event_genotyping_
         Boolean use_gatk3_haplotype_caller_ = false
         Boolean use_dragen_hard_filtering_
@@ -62,18 +62,24 @@ workflow ReprocessFilesWorkflow {
 
     }
 
+    call Utilities.CreateSequenceGroupingTSV as CreateSequenceGroupingTSV {
+    input:
+      ref_dict = references.reference_fasta.ref_dict,
+      preemptible_tries = papi_settings.preemptible_tries
+  }
 
-    #call Utilities.SumFloats as SumFloats {
-    #input:
-      #sizes = mapped_bam_size,
-      #preemptible_tries = papi_settings.preemptible_tries
+    call Utilities.SumFloats as SumFloats {
+        input:
+            sizes = sizes,
+            preemptible_tries = papi_settings.preemptible_tries
+    }
 
     scatter (file in input_files) {
         call UnmarkDuplicates {
             input:
                 input_bam = file,
                 output_bam_basename = "output_~{basename(file, '.bam')}",
-                total_input_size = total_input_size,
+                total_input_size = SumFloats.total_size,
                 compression_level = compression_level,
                 preemptible_tries = preemptible_tries,
                 memory_multiplier = memory_multiplier,
@@ -96,7 +102,7 @@ workflow ReprocessFilesWorkflow {
             input_bams = FixSMTag.output_bam,
             output_bam_basename = sample_and_unmapped_bams.base_file_name + ".aligned.unsorted.duplicates_marked",
             metrics_filename = sample_and_unmapped_bams.base_file_name + ".duplicate_metrics",
-            total_input_size = size(FixSMTag.output_bam, "GiB"),
+            total_input_size = SumFloats.total_size,
             compression_level = compression_level,
             preemptible_tries = if data_too_large_for_preemptibles then 0 else papi_settings.agg_preemptible_tries
         }
@@ -143,21 +149,21 @@ workflow ReprocessFilesWorkflow {
   # We need disk to localize the sharded input and output due to the scatter for BQSR.
   # If we take the number we are scattering by and reduce by 3 we will have enough disk space
   # to account for the fact that the data is not split evenly.
-  Int num_of_bqsr_scatters = length(sequence_grouping)
+  Int num_of_bqsr_scatters = length(CreateSequenceGroupingTSV.sequence_grouping)
   Int potential_bqsr_divisor = num_of_bqsr_scatters - 10
   Int bqsr_divisor = if potential_bqsr_divisor > 1 then potential_bqsr_divisor else 1
 
   # Perform Base Quality Score Recalibration (BQSR) on the sorted BAM in parallel
 
   if (perform_bqsr) {
-    scatter (subgroup in sequence_grouping) {
+    scatter (subgroup in CreateSequenceGroupingTSV.sequence_grouping) {
       # Generate the recalibration model by interval
       call Processing.BaseRecalibrator as BaseRecalibrator {
         input:
           input_bam = SortSampleBam.output_bam,
           input_bam_index = SortSampleBam.output_bam_index,
           recalibration_report_filename = sample_and_unmapped_bams.base_file_name + ".recal_data.csv",
-          sequence_group_interval = [subgroup],
+          sequence_group_interval = subgroup,
           dbsnp_vcf = references.dbsnp_vcf,
           dbsnp_vcf_index = references.dbsnp_vcf_index,
           known_indels_sites_vcfs = references.known_indels_sites_vcfs,
@@ -179,7 +185,7 @@ workflow ReprocessFilesWorkflow {
         preemptible_tries = papi_settings.preemptible_tries
     }
 
-    scatter (subgroup in sequence_grouping_with_unmapped) {
+    scatter (subgroup in CreateSequenceGroupingTSV.sequence_grouping_with_unmapped) {
       # Apply the recalibration model by interval
       call Processing.ApplyBQSR as ApplyBQSR {
         input:
@@ -187,7 +193,7 @@ workflow ReprocessFilesWorkflow {
           input_bam_index = SortSampleBam.output_bam_index,
           output_bam_basename = recalibrated_bam_basename,
           recalibration_report = GatherBqsrReports.output_bqsr_report,
-          sequence_group_interval = [subgroup],
+          sequence_group_interval = subgroup,
           ref_dict = references.reference_fasta.ref_dict,
           ref_fasta = references.reference_fasta.ref_fasta,
           ref_fasta_index = references.reference_fasta.ref_fasta_index,
@@ -205,7 +211,7 @@ workflow ReprocessFilesWorkflow {
     input:
       input_bams = select_first([ApplyBQSR.recalibrated_bam, [SortSampleBam.output_bam]]),
       output_bam_basename = sample_and_unmapped_bams.base_file_name,
-      total_input_size = size(SortSampleBam.output_bam, 'GiB'),
+      #total_input_size = size(SortSampleBam.output_bam, 'GiB'),
       compression_level = compression_level,
       preemptible_tries = papi_settings.agg_preemptible_tries
   }
