@@ -20,7 +20,8 @@ workflow ReprocessFilesWorkflow {
         String sample_id
         String output_bam_basename
         String metrics_filename
-        Array[Float] sizes
+        #Array[Float] sizes
+        Float total_input_size = size(input_files, "GiB")
         Int compression_level
         Int preemptible_tries
         String? read_name_regex
@@ -68,18 +69,20 @@ workflow ReprocessFilesWorkflow {
       preemptible_tries = papi_settings.preemptible_tries
   }
 
-    call Utilities.SumFloats as SumFloats {
-        input:
-            sizes = sizes,
-            preemptible_tries = papi_settings.preemptible_tries
-    }
+
+
+    #call Utilities.SumFloats as SumFloats {
+        #input:
+           #sizes = SplitRG.current_mapped_size,
+            #preemptible_tries = papi_settings.preemptible_tries
+    #}
 
     scatter (file in input_files) {
         call UnmarkDuplicates {
             input:
                 input_bam = file,
                 output_bam_basename = "output_~{basename(file, '.bam')}",
-                total_input_size = SumFloats.total_size,
+                total_input_size = total_input_size,
                 compression_level = compression_level,
                 preemptible_tries = preemptible_tries,
                 memory_multiplier = memory_multiplier,
@@ -102,7 +105,7 @@ workflow ReprocessFilesWorkflow {
             input_bams = FixSMTag.output_bam,
             output_bam_basename = sample_and_unmapped_bams.base_file_name + ".aligned.unsorted.duplicates_marked",
             metrics_filename = sample_and_unmapped_bams.base_file_name + ".duplicate_metrics",
-            total_input_size = SumFloats.total_size,
+            total_input_size = total_input_size,
             compression_level = compression_level,
             preemptible_tries = if data_too_large_for_preemptibles then 0 else papi_settings.agg_preemptible_tries
         }
@@ -125,7 +128,7 @@ workflow ReprocessFilesWorkflow {
         input_bam_indexes = [SortSampleBam.output_bam_index],
         haplotype_database_file = haplotype_database_file,
         metrics_filename = sample_and_unmapped_bams.base_file_name + ".crosscheck",
-        total_input_size = agg_bam_size,
+        total_input_size = total_input_size,
         lod_threshold = lod_threshold,
         cross_check_by = cross_check_fingerprints_by,
         preemptible_tries = papi_settings.agg_preemptible_tries
@@ -211,7 +214,7 @@ workflow ReprocessFilesWorkflow {
     input:
       input_bams = select_first([ApplyBQSR.recalibrated_bam, [SortSampleBam.output_bam]]),
       output_bam_basename = sample_and_unmapped_bams.base_file_name,
-      #total_input_size = size(SortSampleBam.output_bam, 'GiB'),
+      total_input_size = total_input_size,
       compression_level = compression_level,
       preemptible_tries = papi_settings.agg_preemptible_tries
   }
@@ -377,6 +380,7 @@ task UnmarkDuplicates {
         Int additional_disk = 20
     }
     Float md_disk_multiplier = 3
+    #Float total_input_size = size(input_files, 'GiB')
     Int disk_size = ceil(md_disk_multiplier * total_input_size) + additional_disk
     Float memory_size = 7.5 * memory_multiplier
     Int java_memory_size = (ceil(memory_size) - 2)
