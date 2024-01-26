@@ -395,7 +395,7 @@ task UnmarkDuplicates {
             -Xloggc:gc_log.log -Xms5000m -Xmx5500m" \
             UnmarkDuplicates \
             -I ~{input_bam} \
-            -O ~{output_bam_basename}.bam
+            -O ~{output_bam_basename}.bam \
             -R ~{ref_fasta}
     }
     runtime {
