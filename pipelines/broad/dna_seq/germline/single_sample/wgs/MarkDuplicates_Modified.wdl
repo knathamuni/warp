@@ -388,13 +388,15 @@ task UnmarkDuplicates {
     Int java_memory_size = (ceil(memory_size) - 2)
 
     command {
-        java -Dsamjdk.compression_level=~{compression_level} -Xms~{java_memory_size}g -jar /usr/picard/picard.jar \
-            gatk UnmarkDuplicates \
+        gatk --java-options "-XX:GCTimeLimit=50 -XX:GCHeapFreeLimit=10 -XX:+PrintFlagsFinal \
+            -XX:+PrintGCTimeStamps -XX:+PrintGCDateStamps -XX:+PrintGCDetails \
+            -Xloggc:gc_log.log -Xms5000m -Xmx5500m" \
+            UnmarkDuplicates \
             INPUT=~{input_bam} \
             OUTPUT=~{output_bam_basename}.bam
     }
     runtime {
-        docker: "us.gcr.io/broad-gotc-prod/picard-cloud:2.26.10"
+        docker: "us.gcr.io/broad-gatk/gatk:4.3.0.0"
         preemptible: preemptible_tries
         memory: "~{memory_size} GiB"
         disks: "local-disk " + disk_size + " HDD"
