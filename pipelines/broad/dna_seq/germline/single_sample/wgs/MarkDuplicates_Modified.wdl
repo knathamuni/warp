@@ -75,6 +75,7 @@ workflow ReprocessFilesWorkflow {
             input:
                 input_bam = file,
                 output_bam_basename = "output_~{basename(file)}",
+                ref_fasta = ref_fasta,
                 total_input_size = cram_size,
                 compression_level = compression_level,
                 preemptible_tries = preemptible_tries,
@@ -375,6 +376,7 @@ task UnmarkDuplicates {
     input {
         File input_bam
         String output_bam_basename
+        File ref_fasta
         Float total_input_size
         Int compression_level
         Int preemptible_tries
@@ -394,6 +396,7 @@ task UnmarkDuplicates {
             UnmarkDuplicates \
             -I ~{input_bam} \
             -O ~{output_bam_basename}.bam
+            -R ~{ref_fasta}
     }
     runtime {
         docker: "us.gcr.io/broad-gatk/gatk:4.3.0.0"
