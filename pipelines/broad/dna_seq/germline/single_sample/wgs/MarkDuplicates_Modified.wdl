@@ -76,6 +76,7 @@ workflow ReprocessFilesWorkflow {
                 input_bam = file,
                 output_bam_basename = "output_~{basename(file)}",
                 ref_fasta = ref_fasta,
+                ref_fasta_index = ref_fasta_index,
                 total_input_size = cram_size,
                 compression_level = compression_level,
                 preemptible_tries = preemptible_tries,
@@ -377,6 +378,7 @@ task UnmarkDuplicates {
         File input_bam
         String output_bam_basename
         File ref_fasta
+        File ref_fasta_index
         Float total_input_size
         Int compression_level
         Int preemptible_tries
