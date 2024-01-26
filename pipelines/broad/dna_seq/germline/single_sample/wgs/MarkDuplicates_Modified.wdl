@@ -74,7 +74,7 @@ workflow ReprocessFilesWorkflow {
         call UnmarkDuplicates {
             input:
                 input_bam = file,
-                output_bam_basename = "output_~{basename(file, '.bam')}",
+                output_bam_basename = "output_~{basename(file)}",
                 total_input_size = cram_size,
                 compression_level = compression_level,
                 preemptible_tries = preemptible_tries,
@@ -85,7 +85,7 @@ workflow ReprocessFilesWorkflow {
         call FixSMTag {
             input:
                 input_bam = UnmarkDuplicates.output_bam,
-                output_bam_basename = "output_~{basename(file, '.bam')}",
+                output_bam_basename = "output_~{basename(file)}",
                 sample_id = sample_id
 
         }
@@ -392,8 +392,8 @@ task UnmarkDuplicates {
             -XX:+PrintGCTimeStamps -XX:+PrintGCDateStamps -XX:+PrintGCDetails \
             -Xloggc:gc_log.log -Xms5000m -Xmx5500m" \
             UnmarkDuplicates \
-            INPUT=~{input_bam} \
-            OUTPUT=~{output_bam_basename}.bam
+            -I ~{input_bam} \
+            -O ~{output_bam_basename}.bam
     }
     runtime {
         docker: "us.gcr.io/broad-gatk/gatk:4.3.0.0"
