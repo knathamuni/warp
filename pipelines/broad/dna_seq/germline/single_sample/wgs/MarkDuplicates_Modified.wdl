@@ -31,6 +31,7 @@ workflow ReprocessFilesWorkflow {
         File contamination_sites_mu
         File ref_fasta
         File ref_fasta_index
+        File ref_dict
         String cross_check_fingerprints_by
         File haplotype_database_file
         Float lod_threshold
@@ -77,6 +78,7 @@ workflow ReprocessFilesWorkflow {
                 output_bam_basename = "output_~{basename(file)}",
                 ref_fasta = ref_fasta,
                 ref_fasta_index = ref_fasta_index,
+                ref_dict = ref_dict,
                 total_input_size = cram_size,
                 compression_level = compression_level,
                 preemptible_tries = preemptible_tries,
@@ -379,6 +381,7 @@ task UnmarkDuplicates {
         String output_bam_basename
         File ref_fasta
         File ref_fasta_index
+        File ref_dict
         Float total_input_size
         Int compression_level
         Int preemptible_tries
@@ -398,7 +401,8 @@ task UnmarkDuplicates {
             UnmarkDuplicates \
             -I ~{input_bam} \
             -O ~{output_bam_basename}.bam \
-            -R ~{ref_fasta}
+            -R ~{ref_fasta} \
+            --sequence-dictionary ~{ref_dict}
     }
     runtime {
         docker: "us.gcr.io/broad-gatk/gatk:4.3.0.0"
