@@ -488,7 +488,7 @@ task MarkDuplicates {
     disks: "local-disk " + disk_size + " HDD"
   }
   output {
-    File output_bam = "~{output_bam_basename +'_marked'}.bam"
+    File output_bam = "~{output_bam_basename}.bam"
     File duplicate_metrics = "~{metrics_filename}"
   }
 }
