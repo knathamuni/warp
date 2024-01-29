@@ -53,7 +53,6 @@ workflow ReprocessFilesWorkflow {
         Boolean use_gatk3_haplotype_caller_ = false
         Boolean use_dragen_hard_filtering_
         Boolean provide_bam_output
-        Int additional_disk_size = 20
         String gatk_docker = "broadinstitute/gatk:latest"
         String gatk_path = "/gatk/gatk"
 
@@ -128,7 +127,7 @@ workflow ReprocessFilesWorkflow {
 
   if (defined(haplotype_database_file)) {
     # Check identity of fingerprints across readgroups
-    call QC.CrossCheckFingerprints as CrossCheckFingerprints {
+    call CrossCheckFingerprints {
       input:
         input_bams = [SortSampleBam.output_bam],
         input_bam_indexes = [SortSampleBam.output_bam_index],
@@ -490,5 +489,46 @@ task MarkDuplicates {
   output {
     File output_bam = "~{output_bam_basename}.bam"
     File duplicate_metrics = "~{metrics_filename}"
+  }
+}
+task CrossCheckFingerprints {
+  input {
+    Array[File] input_bams
+    Array[File] input_bam_indexes
+    File haplotype_database_file
+    String metrics_filename
+    Float total_input_size
+    Int preemptible_tries
+    Float lod_threshold
+    String cross_check_by
+    Int additional_disk = 20
+    Int memory_multiplier = 1
+  }
+
+  Float md_disk_multiplier = 3
+  Int disk_size = ceil(md_disk_multiplier * total_input_size) + additional_disk
+  Float memory_size = 7.5 * memory_multiplier
+  Int java_memory_size = (ceil(memory_size) - 2)
+
+  command <<<
+    java -Dsamjdk.buffer_size=131072 \
+      -XX:GCTimeLimit=50 -XX:GCHeapFreeLimit=10 -Xms3000m -Xmx3000m \
+      -jar /usr/picard/picard.jar \
+      CrosscheckFingerprints \
+      OUTPUT=~{metrics_filename} \
+      HAPLOTYPE_MAP=~{haplotype_database_file} \
+      EXPECT_ALL_GROUPS_TO_MATCH=true \
+      INPUT=~{sep=' INPUT=' input_bams} \
+      LOD_THRESHOLD=~{lod_threshold} \
+      CROSSCHECK_BY=~{cross_check_by}
+  >>>
+  runtime {
+    docker: "us.gcr.io/broad-gotc-prod/picard-cloud:2.26.10"
+    preemptible: preemptible_tries
+    memory: "3500 MiB"
+    disks: "local-disk " + disk_size + " HDD"
+  }
+  output {
+    File cross_check_fingerprints_metrics = "~{metrics_filename}"
   }
 }
