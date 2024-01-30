@@ -314,9 +314,6 @@ workflow ReprocessFilesWorkflow {
     File duplicate_metrics = MarkDuplicates.duplicate_metrics
     File? output_bqsr_reports = GatherBqsrReports.output_bqsr_report
 
-    File output_bam = GatherBamFiles.output_bam
-    File output_bam_index = GatherBamFiles.output_bam_index
-
     #Array[File] quality_yield_metrics = GatherBamFiles.quality_yield_metrics
 
    #Array[File] unsorted_read_group_base_distribution_by_cycle_pdf = GatherBamFiles.unsorted_read_group_base_distribution_by_cycle_pdf
