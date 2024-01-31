@@ -89,7 +89,8 @@ workflow ReprocessFilesWorkflow {
             input:
                 input_bam = UnmarkDuplicates.output_bam,
                 output_bam_basename = "output_~{basename(file)}",
-                sample_id = sample_id
+                sample_id = sample_id,
+                total_input_size = size(UnmarkDuplicates.output_bam, 'GiB')
 
         }
     }
@@ -416,13 +417,18 @@ task FixSMTag{
         File input_bam
         String sample_id
         String output_bam_basename
+        Float total_input_size
         #Runtime parameters
-        Int disk_size = 80
-        Int machine_mem_gb = 2
+        Int additional_disk = 20
+        Int memory_multiplier = 1
         Int preemptible_attempts = 3
     }
 
-    Int command_mem_gb = machine_mem_gb - 1
+    Float md_disk_multiplier = 3
+    #Float total_input_size = size(input_files, 'GiB')
+    Int disk_size = ceil(md_disk_multiplier * total_input_size) + additional_disk
+    Float memory_size = 7.5 * memory_multiplier
+    Int java_memory_size = (ceil(memory_size) - 2)
 
     command {
         samtools view -H ~{input_bam} | sed 's/^\(@RG.*\tSM:\)\([^[:space:]]*\)/\1~{sample_id}/' | sed 's/^\(@RG.*\tLB:\)\([^[:space:]]*\)/\1~{sample_id}/' > new_header.sam
@@ -431,7 +437,7 @@ task FixSMTag{
     runtime {
         docker: "us.gcr.io/broad-gotc-prod/genomes-in-the-cloud@sha256:7bc64948a0a9f50ea55edb8b30c710943e44bd861c46a229feaf121d345e68ed"
         disks: "local-disk " + disk_size + " HDD"
-        memory: machine_mem_gb + " GB"
+        memory: "~{memory_size} GiB"
         preemptible: preemptible_attempts
     }
     output {
