@@ -511,6 +511,7 @@ task GenotypeGVCFs {
       ~{true='--allow-old-rms-mapping-quality-annotation-data' false='' allow_old_rms_mapping_quality_annotation_data} \
       ~{true='--keep-combined-raw-annotations' false='' keep_combined_raw_annotations} \
       --max-genotype-count 1400 \
+      --genomicsdb-max-alternate-alleles 101
       --max-alternate-alleles 100
   >>>
 
