@@ -108,7 +108,7 @@ workflow JointGenotyping {
     # is the optimal value for the amount of memory allocated
     # within the task; please do not change it without consulting
     # the Hellbender (GATK engine) team!
-    call Tasks.ImportGVCFs {
+    call ImportGVCFs {
       input:
         sample_name_map = sample_name_map,
         interval = unpadded_intervals[idx],
@@ -459,6 +459,63 @@ if (cross_check_fingerprints) {
   }
   meta {
     allowNestedInputs: true
+  }
+}
+task ImportGVCFs {
+
+  input {
+    File sample_name_map
+    File interval
+    File ref_fasta
+    File ref_fasta_index
+    File ref_dict
+
+    String workspace_dir_name
+
+    Int disk_size_gb
+    Int machine_mem_mb = 30000
+    Int batch_size
+
+    String gatk_docker = "us.gcr.io/broad-gatk/gatk:4.3.0.0"
+  }
+
+  command <<<
+    set -euo pipefail
+
+    rm -rf ~{workspace_dir_name}
+
+    # We've seen some GenomicsDB performance regressions related to intervals, so we're going to pretend we only have a single interval
+    # using the --merge-input-intervals arg
+    # There's no data in between since we didn't run HaplotypeCaller over those loci so we're not wasting any compute
+
+    # The memory setting here is very important and must be several GiB lower
+    # than the total memory allocated to the VM because this tool uses
+    # a significant amount of non-heap memory for native libraries.
+    # Also, testing has shown that the multithreaded reader initialization
+    # does not scale well beyond 5 threads, so don't increase beyond that.
+    gatk --java-options "-Xms8000m -Xmx25000m" \
+      GenomicsDBImport \
+      --genomicsdb-workspace-path ~{workspace_dir_name} \
+      --batch-size ~{batch_size} \
+      -L ~{interval} \
+      --sample-name-map ~{sample_name_map} \
+      --reader-threads 5 \
+      --consolidate
+
+    tar -cf ~{workspace_dir_name}.tar ~{workspace_dir_name}
+  >>>
+
+  runtime {
+    memory: "~{machine_mem_mb} MiB"
+    cpu: 4
+    bootDiskSizeGb: 15
+    disks: "local-disk " + disk_size_gb + " HDD"
+    docker: gatk_docker
+    preemptible: 1
+  }
+
+  output {
+    File output_genomicsdb = "~{workspace_dir_name}.tar"
   }
 }
 
