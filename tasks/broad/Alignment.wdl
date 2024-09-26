@@ -156,7 +156,7 @@ task SamSplitter {
   runtime {
     docker: "us.gcr.io/broad-gotc-prod/samtools-picard-bwa:1.0.2-0.7.15-2.26.10-1643840748"
     preemptible: preemptible_tries
-    memory: "3.75 GiB"
+    memory: "20 GiB"
     disks: "local-disk " + disk_size + " HDD"
   }
 }
