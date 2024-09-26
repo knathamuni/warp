@@ -24,7 +24,7 @@ import "../../tasks/broad/BamProcessing.wdl" as Processing
 import "../../tasks/broad/Utilities.wdl" as Utils
 import "../../structs/dna_seq/DNASeqStructs.wdl" as Structs
 
-# WORKFLOW DEFINITION
+
 workflow UnmappedBamToAlignedBam {
 
   input {

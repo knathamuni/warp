@@ -31,7 +31,7 @@ workflow SplitLargeReadGroup {
 
     # reference_fasta.ref_alt is the .alt file from bwa-kit
     # (https://github.com/lh3/bwa/tree/master/bwakit),
-    
+
     ReferenceFasta reference_fasta
     DragmapReference? dragmap_reference
 
