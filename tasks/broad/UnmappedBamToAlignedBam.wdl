@@ -48,6 +48,8 @@ workflow UnmappedBamToAlignedBam {
     Boolean perform_bqsr = true
     Boolean use_bwa_mem = true
     Boolean allow_empty_ref_alt = false
+    Int machine_mem_gb
+    Int disk_size_gb
   }
 
   Float cutoff_for_large_rg_in_gb = 20.0
@@ -88,7 +90,9 @@ workflow UnmappedBamToAlignedBam {
           hard_clip_reads = hard_clip_reads,
           unmap_contaminant_reads = unmap_contaminant_reads,
           use_bwa_mem = use_bwa_mem,
-          allow_empty_ref_alt = allow_empty_ref_alt
+          allow_empty_ref_alt = allow_empty_ref_alt,
+          machine_mem_gb = machine_mem_gb,
+          disk_size_gb = disk_size_gb
       }
     }
 

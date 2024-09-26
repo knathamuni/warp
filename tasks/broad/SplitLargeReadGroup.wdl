@@ -37,6 +37,8 @@ workflow SplitLargeReadGroup {
 
     Int compression_level
     Int preemptible_tries
+    Int machine_mem_gb
+    Int disk_size_gb
     Int reads_per_file = 48000000
     Boolean hard_clip_reads = false
     Boolean unmap_contaminant_reads = true
@@ -49,7 +51,9 @@ workflow SplitLargeReadGroup {
       input_bam = input_bam,
       n_reads = reads_per_file,
       preemptible_tries = preemptible_tries,
-      compression_level = compression_level
+      compression_level = compression_level,
+      machine_mem_gb = machine_mem_gb,
+      disk_size_gb = disk_size_gb
   }
 
   scatter(unmapped_bam in SamSplitter.split_bams) {

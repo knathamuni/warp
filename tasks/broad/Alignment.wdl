@@ -131,8 +131,10 @@ task SamSplitter {
     Int n_reads
     Int compression_level
     Int preemptible_tries = 3
-  }
+    Int disk_size_gb
 
+  }
+  Int machine_mem_gb = 250
   Float unmapped_bam_size = size(input_bam, "GiB")
   # Since the output bams are less compressed than the input bam we need a disk multiplier that's larger than 2.
   Float disk_multiplier = 2.5

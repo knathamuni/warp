@@ -159,7 +159,7 @@ workflow WholeGenomeGermlineSingleSample {
       preemptible_tries = papi_settings.agg_preemptible_tries
   }
 
-  
+
   call QC.CollectRawWgsMetrics as CollectRawWgsMetrics {
     input:
       input_bam = UnmappedBamToAlignedBam.output_bam,
