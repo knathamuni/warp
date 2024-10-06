@@ -31,6 +31,7 @@ input {
     PapiSettings papi_settings
     File? fingerprint_genotypes_file
     File? fingerprint_genotypes_index
+    Int machine_mem_gb
   }
 
   # QC the final BAM (consolidated after scattered BQSR)
@@ -42,7 +43,8 @@ input {
       ref_dict = references.reference_fasta.ref_dict,
       ref_fasta = references.reference_fasta.ref_fasta,
       ref_fasta_index = references.reference_fasta.ref_fasta_index,
-      preemptible_tries = papi_settings.agg_preemptible_tries
+      preemptible_tries = papi_settings.agg_preemptible_tries,
+      machine_mem_gb = machine_mem_gb
   }
 
   # QC the final BAM some more (no such thing as too much QC)

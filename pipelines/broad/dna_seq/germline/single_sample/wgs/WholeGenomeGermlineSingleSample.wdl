@@ -68,6 +68,7 @@ workflow WholeGenomeGermlineSingleSample {
     Boolean use_bwa_mem = true
     Boolean allow_empty_ref_alt = false
     Boolean use_dragen_hard_filtering = false
+    Int machine_mem_gb
   }
 
   if (dragen_functional_equivalence_mode && dragen_maximum_quality_mode) {
@@ -132,7 +133,8 @@ workflow WholeGenomeGermlineSingleSample {
       references = references,
       fingerprint_genotypes_file = fingerprint_genotypes_file,
       fingerprint_genotypes_index = fingerprint_genotypes_index,
-      papi_settings = papi_settings
+      papi_settings = papi_settings,
+      machine_mem_gb = machine_mem_gb
   }
 
   call ToCram.BamToCram as BamToCram {

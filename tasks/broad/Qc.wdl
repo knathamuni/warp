@@ -100,6 +100,7 @@ task CollectReadgroupBamQualityMetrics {
     File ref_fasta_index
     Boolean collect_gc_bias_metrics = true
     Int preemptible_tries
+    Int machine_mem_gb
   }
 
   Float ref_size = size(ref_fasta, "GiB") + size(ref_fasta_index, "GiB") + size(ref_dict, "GiB")
