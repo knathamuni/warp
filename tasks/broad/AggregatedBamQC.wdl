@@ -75,6 +75,7 @@ input {
   }
 
   # Generate a checksum per readgroup in the final BAM
+  #edited
   call QC.CalculateReadGroupChecksum as CalculateReadGroupChecksum {
     input:
       input_bam = base_recalibrated_bam,

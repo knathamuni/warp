@@ -126,7 +126,7 @@ task CollectReadgroupBamQualityMetrics {
   }
   runtime {
     docker: "us.gcr.io/broad-gotc-prod/picard-cloud:2.26.10"
-    memory: "7000 MiB"
+    memory: machine_mem_gb + "MiB"
     disks: "local-disk " + disk_size + " HDD"
     preemptible: preemptible_tries
   }
