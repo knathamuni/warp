@@ -121,7 +121,7 @@ workflow WholeGenomeGermlineSingleSample {
       unmap_contaminant_reads     = unmap_contaminant_reads_,
       allow_empty_ref_alt         = allow_empty_ref_alt
   }
-#edited
+#edited for more mem
   call AggregatedQC.AggregatedBamQC {
     input:
       base_recalibrated_bam = UnmappedBamToAlignedBam.output_bam,

@@ -80,7 +80,8 @@ input {
       input_bam = base_recalibrated_bam,
       input_bam_index = base_recalibrated_bam_index,
       read_group_md5_filename = recalibrated_bam_base_name + ".bam.read_group_md5",
-      preemptible_tries = papi_settings.agg_preemptible_tries
+      preemptible_tries = papi_settings.agg_preemptible_tries,
+      machine_mem_gb = machine_mem_gb
   }
 
   output {

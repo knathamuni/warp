@@ -586,6 +586,7 @@ task CalculateReadGroupChecksum {
     File input_bam_index
     String read_group_md5_filename
     Int preemptible_tries
+    Int machine_mem_gb
   }
 
   Int disk_size = ceil(size(input_bam, "GiB")) + 40
