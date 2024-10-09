@@ -100,7 +100,7 @@ task CollectReadgroupBamQualityMetrics {
     File ref_fasta_index
     Boolean collect_gc_bias_metrics = true
     Int preemptible_tries
-    Int machine_mem_gb
+    Int machine_mem_mb
   }
 
   Float ref_size = size(ref_fasta, "GiB") + size(ref_fasta_index, "GiB") + size(ref_dict, "GiB")
@@ -126,7 +126,7 @@ task CollectReadgroupBamQualityMetrics {
   }
   runtime {
     docker: "us.gcr.io/broad-gotc-prod/picard-cloud:2.26.10"
-    memory: machine_mem_gb + "MiB"
+    memory: machine_mem_mb + "MiB"
     disks: "local-disk " + disk_size + " HDD"
     preemptible: preemptible_tries
   }
@@ -586,7 +586,7 @@ task CalculateReadGroupChecksum {
     File input_bam_index
     String read_group_md5_filename
     Int preemptible_tries
-    Int machine_mem_gb
+    Int machine_mem_mb
   }
 
   Int disk_size = ceil(size(input_bam, "GiB")) + 40
@@ -600,7 +600,7 @@ task CalculateReadGroupChecksum {
   runtime {
     docker: "us.gcr.io/broad-gotc-prod/picard-cloud:2.26.10"
     preemptible: preemptible_tries
-    memory: "4000 MiB"
+    memory: machine_mem_mb + "MiB"
     disks: "local-disk " + disk_size + " HDD"
   }
   output {
