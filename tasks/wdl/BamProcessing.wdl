@@ -53,6 +53,7 @@ task SortSam {
     cpu: "1"
     memory: "${machine_mem_mb} MiB"
     preemptible: preemptible_tries
+    maxRetries: 1
   }
   output {
     File output_bam = "~{output_bam_basename}.bam"
@@ -113,6 +114,7 @@ task MarkDuplicates {
     preemptible: preemptible_tries
     memory: "~{memory_size} GiB"
     disks: "local-disk " + disk_size + " HDD"
+    maxRetries: 1
   }
   output {
     File output_bam = "~{output_bam_basename}.bam"
@@ -168,6 +170,7 @@ task BaseRecalibrator {
     memory: "6000 MiB"
     bootDiskSizeGb: 15
     disks: "local-disk " + disk_size + " HDD"
+    maxRetries: 1
   }
   output {
     File recalibration_report = "~{recalibration_report_filename}"
@@ -234,6 +237,7 @@ task ApplyBQSR {
     memory: "~{memory_size} MiB"
     bootDiskSizeGb: 15
     disks: "local-disk " + disk_size + " HDD"
+    maxRetries: 1
   }
   output {
     File recalibrated_bam = "~{output_bam_basename}.bam"
@@ -262,6 +266,7 @@ task GatherBqsrReports {
     memory: "3500 MiB"
     bootDiskSizeGb: 15
     disks: "local-disk 20 HDD"
+    maxRetries: 1
   }
   output {
     File output_bqsr_report = "~{output_report_filename}"
@@ -299,6 +304,7 @@ task GatherSortedBamFiles {
     preemptible: preemptible_tries
     memory: "${machine_mem_mb} MiB"
     disks: "local-disk " + disk_size + " HDD"
+    maxRetries: 1
   }
   output {
     File output_bam = "~{output_bam_basename}.bam"
@@ -334,6 +340,7 @@ task GatherUnsortedBamFiles {
     preemptible: preemptible_tries
     memory: "3 GiB"
     disks: "local-disk " + disk_size + " HDD"
+    maxRetries: 1
   }
   output {
     File output_bam = "~{output_bam_basename}.bam"
@@ -384,6 +391,7 @@ task GenerateSubsettedContaminationResources {
     memory: "3.5 GiB"
     disks: "local-disk 10 HDD"
     docker: "us.gcr.io/broad-gotc-prod/bedtools:2.27.1"
+    maxRetries: 1
   }
   output {
     File subsetted_contamination_ud = output_ud
@@ -470,6 +478,7 @@ task CheckContamination {
     disks: "local-disk " + disk_size + " HDD"
     docker: docker
     cpu: 2
+    maxRetries: 1
   }
   output {
     File selfSM = "~{output_prefix}.selfSM"

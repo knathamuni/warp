@@ -73,5 +73,6 @@ task CopyFilesFromCloudToCloud {
     docker: "us.gcr.io/broad-gotc-prod/dsde-toolbox:stable_04-18-2022"
     preemptible: 3
     noAddress: false
+    maxRetries: 1
   }
 }

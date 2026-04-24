@@ -72,6 +72,7 @@ task CalculateSomaticContamination {
         maxRetries: select_first([max_retries, 2])
         disks: "local-disk " + disk_size + " HDD"
         preemptible: select_first([preemptible_attempts, 3])
+        maxRetries: 1
     }
 
     output {

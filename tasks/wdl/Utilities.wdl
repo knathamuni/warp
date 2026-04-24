@@ -64,6 +64,7 @@ task CreateSequenceGroupingTSV {
     preemptible: preemptible_tries
     docker: "us.gcr.io/broad-dsp-gcr-public/base/python:3.9-debian"
     memory: "2 GiB"
+    maxRetries: 1
   }
   output {
     Array[Array[String]] sequence_grouping = read_tsv("sequence_grouping.txt")
@@ -114,6 +115,7 @@ task ScatterIntervalList {
   runtime {
     docker: docker
     memory: "2000 MiB"
+    maxRetries: 1
   }
 }
 
@@ -151,6 +153,7 @@ task ConvertToCram {
     memory: "3 GiB"
     cpu: "1"
     disks: "local-disk " + disk_size + " HDD"
+    maxRetries: 1
   }
   output {
     File output_cram = "~{output_basename}.cram"
@@ -182,6 +185,7 @@ task ConvertToBam {
     memory: "3 GiB"
     cpu: "1"
     disks: "local-disk 200 HDD"
+    maxRetries: 1
   }
   output {
     File output_bam = "~{output_basename}.bam"
@@ -205,6 +209,7 @@ task SumFloats {
   runtime {
     docker: "us.gcr.io/broad-dsp-gcr-public/base/python:3.9-debian"
     preemptible: preemptible_tries
+    maxRetries: 1
   }
 }
 
@@ -220,6 +225,7 @@ task ErrorWithMessage {
 
   runtime {
     docker: "ubuntu:20.04"
+    maxRetries: 1
   }
 }
 
@@ -291,6 +297,7 @@ task GetValidationInputs {
     cpu: cpu
     memory: "~{memory_mb} MiB"
     disks: "local-disk ~{disk_size_gb} HDD"
+    maxRetries: 1
   }
 
   output {

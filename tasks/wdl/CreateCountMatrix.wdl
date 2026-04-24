@@ -47,6 +47,7 @@ task CreateSparseCountMatrix {
     disk: disk + " GB" # TES
     cpu: cpu
     preemptible: preemptible
+    maxRetries: 1
   }
 
   output {
@@ -99,6 +100,7 @@ task MergeCountFiles {
     disk: disk + " GB" # TES
     cpu: cpu
     preemptible: preemptible
+    maxRetries: 1
   }
 
   output {

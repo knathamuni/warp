@@ -125,6 +125,7 @@ task OptimusH5adGeneration {
     memory: "~{machine_mem_mb} MiB"
     disks: "local-disk ~{disk} HDD"
     disk: disk + " GB" # TES
+    maxRetries: 1
     preemptible: preemptible
   }
 
@@ -245,6 +246,7 @@ task SingleNucleusOptimusH5adOutput {
         disks: "local-disk ~{disk} HDD"
         disk: disk + " GB" # TES
         preemptible: preemptible
+        maxRetries: 1
     }
 
     output {
@@ -405,6 +407,7 @@ task JoinMultiomeBarcodes {
     disks: "local-disk ~{disk} HDD"
     memory: "${machine_mem_mb} MiB"
     cpu: nthreads
+    maxRetries: 1
   }
 
   output {
@@ -509,6 +512,7 @@ task SlideseqH5adGeneration {
     disks: "local-disk ~{disk} HDD"
     disk: disk + " GB" # TES
     preemptible: preemptible
+    maxRetries: 1
   }
 
   output {
@@ -591,6 +595,7 @@ task SingleNucleusSlideseqH5adOutput {
         disks: "local-disk ~{disk} HDD"
         disk: disk + " GB" # TES
         preemptible: preemptible
+        maxRetries: 1
     }
 
     output {
@@ -683,6 +688,7 @@ task SingleNucleusSmartSeq2H5adOutput {
         disks: "local-disk ~{disk} HDD"
         disk: disk + " GB" # TES
         preemptible: preemptible
+        maxRetries: 1
     }
 
     output {

@@ -36,6 +36,7 @@ task SortBam {
         disk: disk + " GB" # TES
         cpu: cpu
         preemptible: preemptible
+        maxRetries: 1
     }
 
     output {
@@ -80,6 +81,7 @@ task SortBamAndIndex {
         disk: disk + " GB" # TES
         cpu: cpu
         preemptible: preemptible
+        maxRetries: 1
     }
 
     output {
@@ -146,6 +148,7 @@ task CollectMultipleMetrics {
     disks: "local-disk ${disk} HDD"
     cpu: cpu
     preemptible: preemptible
+    maxRetries: 1
   }
   
   output {
@@ -230,6 +233,7 @@ task CollectMultipleMetricsMultiSample {
         disk: disk + " GB" # TES
         cpu: cpu
         preemptible: preemptible
+        maxRetries: 1
     }
 
     output {
@@ -296,6 +300,7 @@ task CollectRnaMetrics {
     disk: disk + " GB" # TES
     cpu: cpu
     preemptible: preemptible
+    maxRetries: 1
   }
 
   output {
@@ -353,6 +358,7 @@ task CollectDuplicationMetrics {
     disk: disk + " GB" # TES
     cpu: cpu
     preemptible: preemptible
+    maxRetries: 1
   }
   
   output {
@@ -424,6 +430,7 @@ task RemoveDuplicatesFromBam {
     disk: disk + " GB" # TES
     cpu: cpu
     preemptible: preemptible
+    maxRetries: 1
   }
   
   output {

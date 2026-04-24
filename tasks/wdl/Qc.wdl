@@ -38,6 +38,7 @@ task CollectQualityYieldMetrics {
     disks: "local-disk " + disk_size + " HDD"
     memory: "3500 MiB"
     preemptible: preemptible_tries
+    maxRetries: 1
   }
   output {
     File quality_yield_metrics = "~{metrics_filename}"
@@ -76,6 +77,7 @@ task CollectUnsortedReadgroupBamQualityMetrics {
     memory: "7000 MiB"
     disks: "local-disk " + disk_size + " HDD"
     preemptible: preemptible_tries
+    maxRetries: 1
   }
   output {
     File base_distribution_by_cycle_pdf = "~{output_bam_prefix}.base_distribution_by_cycle.pdf"
@@ -128,6 +130,7 @@ task CollectReadgroupBamQualityMetrics {
     memory: "7000 MiB"
     disks: "local-disk " + disk_size + " HDD"
     preemptible: preemptible_tries
+    maxRetries: 1
   }
   output {
     File alignment_summary_metrics = "~{output_bam_prefix}.alignment_summary_metrics"
@@ -182,6 +185,7 @@ task CollectAggregationMetrics {
     memory: "18000 MiB"
     disks: "local-disk " + disk_size + " HDD"
     preemptible: preemptible_tries
+    maxRetries: 1
   }
   output {
     File alignment_summary_metrics = "~{output_bam_prefix}.alignment_summary_metrics"
@@ -233,6 +237,7 @@ task ConvertSequencingArtifactToOxoG {
     memory: "~{memory_size} MiB"
     disks: "local-disk " + disk_size + " HDD"
     preemptible: preemptible_tries
+    maxRetries: 1
   }
   output {
     File oxog_metrics = "~{base_name}.oxog_metrics"
@@ -271,6 +276,7 @@ task CrossCheckFingerprints {
     preemptible: preemptible_tries
     memory: "3500 MiB"
     disks: "local-disk " + disk_size + " HDD"
+    maxRetries: 1
   }
   output {
     File cross_check_fingerprints_metrics = "~{metrics_filename}"
@@ -341,6 +347,7 @@ task CheckFingerprintTask {
     disks: "local-disk " + disk_size + " HDD"
     memory: "~{memory_size} MiB"
     preemptible: preemptible_tries
+    maxRetries: 1
   }
 
   output {
@@ -391,6 +398,7 @@ task CheckPreValidation {
     docker: "us.gcr.io/broad-dsp-gcr-public/base/python:3.9-debian"
     preemptible: preemptible_tries
     memory: "2 GiB"
+    maxRetries: 1
   }
   output {
     Float duplication_rate = read_float("duplication_value.txt")
@@ -441,6 +449,7 @@ task ValidateSamFile {
     preemptible: preemptible_tries
     memory: "~{memory_size} MiB"
     disks: "local-disk " + disk_size + " HDD"
+    maxRetries: 1
   }
   output {
     File report = "~{report_filename}"
@@ -479,6 +488,7 @@ task CollectWgsMetrics {
     preemptible: preemptible_tries
     memory: "3000 MiB"
     disks: "local-disk " + disk_size + " HDD"
+    maxRetries: 1
   }
   output {
     File metrics = "~{metrics_filename}"
@@ -522,6 +532,7 @@ task CollectRawWgsMetrics {
     preemptible: preemptible_tries
     memory: "~{memory_size} GiB"
     disks: "local-disk " + disk_size + " HDD"
+    maxRetries: 1
   }
   output {
     File metrics = "~{metrics_filename}"
@@ -571,6 +582,7 @@ task CollectHsMetrics {
     preemptible: preemptible_tries
     memory: "~{memory_size} MiB"
     disks: "local-disk " + disk_size + " HDD"
+    maxRetries: 1
   }
 
   output {
@@ -600,6 +612,7 @@ task CalculateReadGroupChecksum {
     preemptible: preemptible_tries
     memory: "6000 MiB"
     disks: "local-disk " + disk_size + " HDD"
+    maxRetries: 1
   }
   output {
     File md5_file = "~{read_group_md5_filename}"
@@ -662,6 +675,7 @@ task ValidateVCF {
     memory: machine_mem_mb + " MiB"
     bootDiskSizeGb: 15
     disks: "local-disk " + disk_size + " HDD"
+    maxRetries: 1
   }
 }
 
@@ -698,6 +712,7 @@ task CollectVariantCallingMetrics {
     preemptible: preemptible_tries
     memory: "3000 MiB"
     disks: "local-disk " + disk_size + " HDD"
+    maxRetries: 1
   }
   output {
     File summary_metrics = "~{metrics_basename}.variant_calling_summary_metrics"

@@ -35,6 +35,7 @@ task CheckSamplesUnique {
     preemptible: 1
     disks: "local-disk ~{disk_size_gb} HDD"
     docker: "us.gcr.io/broad-gotc-prod/python:2.7"
+    maxRetries: 1
   }
 }
 
@@ -72,6 +73,7 @@ task SplitIntervalList {
     bootDiskSizeGb: 15
     disks: "local-disk " + disk_size_gb + " HDD"
     docker: gatk_docker
+    maxRetries: 1
   }
 
   output {
@@ -131,6 +133,7 @@ task ImportGVCFs {
     disks: "local-disk " + disk_size_gb + " HDD"
     docker: gatk_docker
     preemptible: 1
+    maxRetries: 1
   }
 
   output {
@@ -196,6 +199,7 @@ task GenotypeGVCFs {
     disks: "local-disk " + disk_size_gb + " HDD"
     preemptible: 1
     docker: gatk_docker
+    maxRetries: 1
   }
 
   output {

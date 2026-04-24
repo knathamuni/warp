@@ -48,6 +48,7 @@ task checkInputArrays {
     memory: "1 GiB"
     disks: "local-disk ~{disk} HDD"
     disk: disk + " GB" # TES
+    maxRetries: 1
   }
 
 }
@@ -184,5 +185,6 @@ task checkOptimusInput {
     memory: "~{machine_mem_mb} MiB"
     disks: "local-disk ~{disk} HDD"
     disk: disk + " GB" # TES
+    maxRetries: 1
   } 
 }

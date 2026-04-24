@@ -174,6 +174,7 @@ task Funcotate {
     disks: "local-disk ~{disk_size} ~{disk_type}"
     preemptible: preemptible_attempts
     cpu: cpu_threads
+    maxRetries: 1
   }
 
   output {

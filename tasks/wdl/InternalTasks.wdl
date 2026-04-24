@@ -21,6 +21,7 @@ task MakeSafeFilename {
     disks: "local-disk 10 HDD"
     memory: "1 GiB"
     preemptible: 3
+    maxRetries: 1
   }
   output {
     String output_safe_name = read_string('safe_name.txt')

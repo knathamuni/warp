@@ -76,6 +76,7 @@ task Attach10xBarcodes {
     disk: disk + " GB" # TES
     cpu: cpu
     preemptible: preemptible
+    maxRetries: 1
   }
 
   output {

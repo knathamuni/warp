@@ -74,6 +74,7 @@ task HaplotypeCaller_GATK35_GVCF {
     memory: "10000 MiB"
     cpu: "1"
     disks: "local-disk " + disk_size + " HDD"
+    maxRetries: 1
   }
   output {
     File output_gvcf = "~{gvcf_basename}.vcf.gz"
@@ -167,6 +168,7 @@ task HaplotypeCaller_GATK4_VCF {
     cpu: "2"
     bootDiskSizeGb: 15
     disks: "local-disk " + disk_size + " HDD"
+    maxRetries: 1
   }
 
   output {
@@ -202,6 +204,7 @@ task MergeVCFs {
     preemptible: preemptible_tries
     memory: "3000 MiB"
     disks: "local-disk ~{disk_size} HDD"
+    maxRetries: 1
   }
   output {
     File output_vcf = "~{output_vcf_name}"
@@ -256,6 +259,7 @@ task Reblock {
     bootDiskSizeGb: 15
     preemptible: 3
     docker: docker_path
+    maxRetries: 1
   }
 
   output {
@@ -296,6 +300,7 @@ task HardFilterVcf {
     memory: "3000 MiB"
     bootDiskSizeGb: 15
     disks: "local-disk " + disk_size + " HDD"
+    maxRetries: 1
   }
 }
 
@@ -333,6 +338,7 @@ task DragenHardFilterVcf {
     memory: "3000 MiB"
     bootDiskSizeGb: 15
     disks: "local-disk " + disk_size + " HDD"
+    maxRetries: 1
   }
 }
 
@@ -383,6 +389,7 @@ task CNNScoreVariants {
     cpu: "2"
     bootDiskSizeGb: 15
     disks: "local-disk " + disk_size + " HDD"
+    maxRetries: 1
   }
 }
 
@@ -441,5 +448,6 @@ task FilterVariantTranches {
     disks: "local-disk " + disk_size + " HDD"
     preemptible: preemptible_tries
     docker: gatk_docker
+    maxRetries: 1
   }
 }

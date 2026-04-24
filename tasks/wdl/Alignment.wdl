@@ -118,6 +118,7 @@ task SamToFastqAndBwaMemAndMba {
     memory: "14 GiB"
     cpu: "16"
     disks: "local-disk " + disk_size + " HDD"
+    maxRetries: 1
   }
   output {
     File output_bam = "~{output_bam_basename}.bam"
@@ -158,5 +159,6 @@ task SamSplitter {
     preemptible: preemptible_tries
     memory: "3.75 GiB"
     disks: "local-disk " + disk_size + " HDD"
+    maxRetries: 1
   }
 }

@@ -30,6 +30,7 @@ task GenerateEmptyVariantCallingMetricsFile {
     docker: "us.gcr.io/broad-arrays-prod/arrays-picard-private:4.1.3-1652895718"
     memory: "3500 MiB"
     preemptible: preemptible_tries
+    maxRetries: 1
   }
 
   output {
@@ -76,6 +77,7 @@ task BlacklistBarcode {
     docker: "us.gcr.io/broad-arrays-prod/arrays-picard-private:4.1.3-1652895718"
     memory: "3500 MiB"
     preemptible: preemptible_tries
+    maxRetries: 1
   }
 }
 
@@ -128,6 +130,7 @@ task VcfToMercuryFingerprintJson {
     disks: "local-disk " + disk_size + " HDD"
     memory: "3500 MiB"
     preemptible: preemptible_tries
+    maxRetries: 1
   }
 
   output {
@@ -156,6 +159,7 @@ task CreateBafRegressMetricsFile {
     disks: "local-disk " + disk_size + " HDD"
     memory: "3500 MiB"
     preemptible: preemptible_tries
+    maxRetries: 1
   }
 
   output {
@@ -233,6 +237,7 @@ task UploadArraysMetrics {
     disks: "local-disk " + disk_size + " HDD"
     memory: "3500 MiB"
     preemptible: preemptible_tries
+    maxRetries: 1
   }
 
   output {
@@ -282,6 +287,7 @@ task UploadEmptyArraysMetrics {
     disks: "local-disk " + disk_size + " HDD"
     memory: "3500 MiB"
     preemptible: preemptible_tries
+    maxRetries: 1
   }
 
   output {
@@ -339,6 +345,7 @@ task CreateChipWellBarcodeParamsFile {
     disks: "local-disk 10 HDD"
     memory: "2 GiB"
     preemptible: preemptible_tries
+    maxRetries: 1
   }
   output {
     File params_file = params_filename
@@ -381,6 +388,7 @@ task UpdateChipWellBarcodeIndex {
     disks: "local-disk " + disk_size + " HDD"
     memory: "3500 MiB"
     preemptible: preemptible_tries
+    maxRetries: 1
   }
 }
 
@@ -416,6 +424,7 @@ task GetNextArraysQcAnalysisVersionNumber {
     docker: "us.gcr.io/broad-arrays-prod/arrays-picard-private:4.1.3-1652895718"
     memory: "3500 MiB"
     preemptible: preemptible_tries
+    maxRetries: 1
   }
   output {
     Int analysis_version_number = read_int(stdout())
@@ -449,6 +458,7 @@ task ResolveExtendedIlluminaManifestFile {
     disks: "local-disk 10 HDD"
     memory: "2 GiB"
     preemptible: preemptible_tries
+    maxRetries: 1
   }
   output {
     String extended_illumina_manifest_file = arrays_chip_metadata_path + read_string("output_file.txt")
@@ -484,6 +494,7 @@ task ResolveMinorAlleleFrequencyFile {
     disks: "local-disk 10 HDD"
     memory: "2 GiB"
     preemptible: preemptible_tries
+    maxRetries: 1
   }
   output {
     Boolean found = read_boolean("found.txt")
@@ -543,6 +554,7 @@ task FormatArraysOutputs {
 
     runtime {
         docker: "gcr.io/emerge-production/emerge_wdls:v.1.0"
+        maxRetries: 1
     }
 
     output {

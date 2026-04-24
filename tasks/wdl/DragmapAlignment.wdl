@@ -94,6 +94,7 @@ task SamToFastqAndDragmapAndMba {
     memory: "${memory_mb} MiB"
     disks: "local-disk ${disk_size_gb} HDD"
     cpu: cpu
+    maxRetries: 1
   }
   output {
     File output_bam = "~{output_bam_basename}.bam"
