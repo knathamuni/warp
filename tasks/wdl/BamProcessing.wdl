@@ -49,7 +49,7 @@ task SortSam {
   }
   runtime {
     docker: docker
-    disks: "local-disk " + disk_size + " HDD"
+    disks: "local-disk " + disk_size + " SSD"
     cpu: "1"
     memory: "${machine_mem_mb} MiB"
     preemptible: preemptible_tries
@@ -113,7 +113,7 @@ task MarkDuplicates {
     docker: "us.gcr.io/broad-gotc-prod/picard-cloud:2.26.10"
     preemptible: preemptible_tries
     memory: "~{memory_size} GiB"
-    disks: "local-disk " + disk_size + " HDD"
+    disks: "local-disk " + disk_size + " SSD"
     maxRetries: 1
   }
   output {
@@ -169,7 +169,7 @@ task BaseRecalibrator {
     preemptible: preemptible_tries
     memory: "6000 MiB"
     bootDiskSizeGb: 15
-    disks: "local-disk " + disk_size + " HDD"
+    disks: "local-disk " + disk_size + " SSD"
     maxRetries: 1
   }
   output {
@@ -236,7 +236,7 @@ task ApplyBQSR {
     preemptible: preemptible_tries
     memory: "~{memory_size} MiB"
     bootDiskSizeGb: 15
-    disks: "local-disk " + disk_size + " HDD"
+    disks: "local-disk " + disk_size + " SSD"
     maxRetries: 1
   }
   output {
@@ -265,7 +265,7 @@ task GatherBqsrReports {
     preemptible: preemptible_tries
     memory: "3500 MiB"
     bootDiskSizeGb: 15
-    disks: "local-disk 20 HDD"
+    disks: "local-disk 20 SSD"
     maxRetries: 1
   }
   output {
@@ -303,7 +303,7 @@ task GatherSortedBamFiles {
     docker: "us.gcr.io/broad-gotc-prod/picard-cloud:2.26.10"
     preemptible: preemptible_tries
     memory: "${machine_mem_mb} MiB"
-    disks: "local-disk " + disk_size + " HDD"
+    disks: "local-disk " + disk_size + " SSD"
     maxRetries: 1
   }
   output {
@@ -339,7 +339,7 @@ task GatherUnsortedBamFiles {
     docker: "us.gcr.io/broad-gotc-prod/picard-cloud:2.26.10"
     preemptible: preemptible_tries
     memory: "3 GiB"
-    disks: "local-disk " + disk_size + " HDD"
+    disks: "local-disk " + disk_size + " SSD"
     maxRetries: 1
   }
   output {
@@ -389,7 +389,7 @@ task GenerateSubsettedContaminationResources {
   runtime {
     preemptible: preemptible_tries
     memory: "3.5 GiB"
-    disks: "local-disk 10 HDD"
+    disks: "local-disk 10 SSD"
     docker: "us.gcr.io/broad-gotc-prod/bedtools:2.27.1"
     maxRetries: 1
   }
@@ -475,7 +475,7 @@ task CheckContamination {
   runtime {
     preemptible: preemptible_tries
     memory: "7.5 GiB"
-    disks: "local-disk " + disk_size + " HDD"
+    disks: "local-disk " + disk_size + " SSD"
     docker: docker
     cpu: 2
     maxRetries: 1
