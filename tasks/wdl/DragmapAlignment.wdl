@@ -92,7 +92,7 @@ task SamToFastqAndDragmapAndMba {
     docker: docker
     preemptible: preemptible_tries
     memory: "${memory_mb} MiB"
-    disks: "local-disk ${disk_size_gb} HDD"
+    disks: "local-disk ${disk_size_gb} SSD"
     cpu: cpu
     maxRetries: 1
   }

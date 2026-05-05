@@ -134,7 +134,7 @@ task ExtractSample {
     }
     runtime {
         memory: "8GB"
-        disks: "local-disk " + (ceil(size(input_vcf, "GB")) * 2 + 10) + " HDD"
+        disks: "local-disk " + (ceil(size(input_vcf, "GB")) * 2 + 10) + " SSD"
         docker: docker
         cpu: 1
     }
@@ -167,7 +167,7 @@ task FilterSampleVCF{
 
     runtime {
         memory: "8GB"
-        disks: "local-disk " + disk_size_gb + " HDD"
+        disks: "local-disk " + disk_size_gb + " SSD"
         bootDiskSizeGb: 20
         docker: docker
         cpu: 1
@@ -202,7 +202,7 @@ task FilterSymbolicAlleles {
     runtime {
         memory: "12 GB"
         cpu: 1
-        disks: "local-disk " + (ceil(size(input_vcf, "GB")) *4 +10) + " HDD"
+        disks: "local-disk " + (ceil(size(input_vcf, "GB")) *4 +10) + " SSD"
         bootDiskSizeGb: 20
         docker: docker
     }
@@ -308,7 +308,7 @@ task EvaluateResults {
     >>>
   runtime {
     memory: "32 GB"
-    disks: "local-disk " + disk_size + " HDD"
+    disks: "local-disk " + disk_size + " SSD"
     bootDiskSizeGb: 20
     docker: docker
   }
@@ -368,7 +368,7 @@ CODE
   >>>
   runtime {
     memory: "32 GB"
-    disks: "local-disk " + disk_size + " HDD"
+    disks: "local-disk " + disk_size + " SSD"
     docker: docker
   }
 
@@ -402,7 +402,7 @@ task AnnotateSampleVCF {
     >>>
     runtime {
         memory: "16 GB"
-        disks: "local-disk " + disk_size + " HDD"
+        disks: "local-disk " + disk_size + " SSD"
         docker: docker
     }
 

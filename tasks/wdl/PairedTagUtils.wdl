@@ -134,7 +134,7 @@ task PairedTagDemultiplex {
         docker: docker_path
         cpu: cpu
         memory: "${mem_size} GiB"
-        disks: "local-disk ${disk_size} HDD"
+        disks: "local-disk ${disk_size} SSD"
         preemptible: preemptible        
     }
 
@@ -189,7 +189,7 @@ task AddBBTag {
         docker: docker_path
         cpu: cpu
         memory: "${mem_size} GiB"
-        disks: "local-disk ${disk_size} HDD"
+        disks: "local-disk ${disk_size} SSD"
         preemptible: preemptible
     }
 
@@ -284,7 +284,7 @@ task ParseBarcodes {
 
   runtime {
       docker: docker_path
-      disks: "local-disk ~{disk} HDD"
+      disks: "local-disk ~{disk} SSD"
       memory: "${machine_mem_mb} MiB"
       cpu: nthreads
   }
@@ -329,7 +329,7 @@ task MaskPeakCallingMetrics {
 
   runtime {
     docker: docker_path
-    disks: "local-disk 32 HDD"
+    disks: "local-disk 32 SSD"
     memory: "8000 MiB"
   }
   output {

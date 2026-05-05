@@ -35,7 +35,7 @@ task CollectQualityYieldMetrics {
   }
   runtime {
     docker: "us.gcr.io/broad-gotc-prod/picard-cloud:2.26.10"
-    disks: "local-disk " + disk_size + " HDD"
+    disks: "local-disk " + disk_size + " SSD"
     memory: "3500 MiB"
     preemptible: preemptible_tries
     maxRetries: 1
@@ -75,7 +75,7 @@ task CollectUnsortedReadgroupBamQualityMetrics {
   runtime {
     docker: "us.gcr.io/broad-gotc-prod/picard-cloud:2.26.10"
     memory: "7000 MiB"
-    disks: "local-disk " + disk_size + " HDD"
+    disks: "local-disk " + disk_size + " SSD"
     preemptible: preemptible_tries
     maxRetries: 1
   }
@@ -128,7 +128,7 @@ task CollectReadgroupBamQualityMetrics {
   runtime {
     docker: "us.gcr.io/broad-gotc-prod/picard-cloud:2.26.10"
     memory: "7000 MiB"
-    disks: "local-disk " + disk_size + " HDD"
+    disks: "local-disk " + disk_size + " SSD"
     preemptible: preemptible_tries
     maxRetries: 1
   }
@@ -183,7 +183,7 @@ task CollectAggregationMetrics {
   runtime {
     docker: "us.gcr.io/broad-gotc-prod/picard-cloud:2.26.10"
     memory: "18000 MiB"
-    disks: "local-disk " + disk_size + " HDD"
+    disks: "local-disk " + disk_size + " SSD"
     preemptible: preemptible_tries
     maxRetries: 1
   }
@@ -235,7 +235,7 @@ task ConvertSequencingArtifactToOxoG {
   runtime {
     docker: "us.gcr.io/broad-gotc-prod/picard-cloud:2.26.10"
     memory: "~{memory_size} MiB"
-    disks: "local-disk " + disk_size + " HDD"
+    disks: "local-disk " + disk_size + " SSD"
     preemptible: preemptible_tries
     maxRetries: 1
   }
@@ -275,7 +275,7 @@ task CrossCheckFingerprints {
     docker: "us.gcr.io/broad-gotc-prod/picard-cloud:2.26.10"
     preemptible: preemptible_tries
     memory: "3500 MiB"
-    disks: "local-disk " + disk_size + " HDD"
+    disks: "local-disk " + disk_size + " SSD"
     maxRetries: 1
   }
   output {
@@ -344,7 +344,7 @@ task CheckFingerprintTask {
 
   runtime {
     docker: "us.gcr.io/broad-gotc-prod/picard-cloud:2.26.10"
-    disks: "local-disk " + disk_size + " HDD"
+    disks: "local-disk " + disk_size + " SSD"
     memory: "~{memory_size} MiB"
     preemptible: preemptible_tries
     maxRetries: 1
@@ -448,7 +448,7 @@ task ValidateSamFile {
     docker: "us.gcr.io/broad-gotc-prod/picard-cloud:2.26.10"
     preemptible: preemptible_tries
     memory: "~{memory_size} MiB"
-    disks: "local-disk " + disk_size + " HDD"
+    disks: "local-disk " + disk_size + " SSD"
     maxRetries: 1
   }
   output {
@@ -487,7 +487,7 @@ task CollectWgsMetrics {
     docker: "us.gcr.io/broad-gotc-prod/picard-cloud:2.26.10"
     preemptible: preemptible_tries
     memory: "3000 MiB"
-    disks: "local-disk " + disk_size + " HDD"
+    disks: "local-disk " + disk_size + " SSD"
     maxRetries: 1
   }
   output {
@@ -531,7 +531,7 @@ task CollectRawWgsMetrics {
     docker: "us.gcr.io/broad-gotc-prod/picard-cloud:2.26.10"
     preemptible: preemptible_tries
     memory: "~{memory_size} GiB"
-    disks: "local-disk " + disk_size + " HDD"
+    disks: "local-disk " + disk_size + " SSD"
     maxRetries: 1
   }
   output {
@@ -581,7 +581,7 @@ task CollectHsMetrics {
     docker: "us.gcr.io/broad-gotc-prod/picard-cloud:2.26.10"
     preemptible: preemptible_tries
     memory: "~{memory_size} MiB"
-    disks: "local-disk " + disk_size + " HDD"
+    disks: "local-disk " + disk_size + " SSD"
     maxRetries: 1
   }
 
@@ -611,7 +611,7 @@ task CalculateReadGroupChecksum {
     docker: "us.gcr.io/broad-gotc-prod/picard-cloud:2.26.10"
     preemptible: preemptible_tries
     memory: "6000 MiB"
-    disks: "local-disk " + disk_size + " HDD"
+    disks: "local-disk " + disk_size + " SSD"
     maxRetries: 1
   }
   output {
@@ -674,7 +674,7 @@ task ValidateVCF {
     preemptible: preemptible_tries
     memory: machine_mem_mb + " MiB"
     bootDiskSizeGb: 15
-    disks: "local-disk " + disk_size + " HDD"
+    disks: "local-disk " + disk_size + " SSD"
     maxRetries: 1
   }
 }
@@ -711,7 +711,7 @@ task CollectVariantCallingMetrics {
     docker: docker
     preemptible: preemptible_tries
     memory: "3000 MiB"
-    disks: "local-disk " + disk_size + " HDD"
+    disks: "local-disk " + disk_size + " SSD"
     maxRetries: 1
   }
   output {

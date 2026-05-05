@@ -67,7 +67,7 @@ task CalculateCellMetrics {
   runtime {
     docker: warp_tools_docker_path
     memory: "${machine_mem_mb} MiB"
-    disks: "local-disk ${disk} HDD"
+    disks: "local-disk ${disk} SSD"
     disk: disk + " GB" # TES
     cpu: cpu
     preemptible: preemptible
@@ -147,7 +147,7 @@ task CalculateGeneMetrics {
   runtime {
     docker: warp_tools_docker_path
     memory: "${machine_mem_mb} MiB"
-    disks: "local-disk ${disk} HDD" 
+    disks: "local-disk ${disk} SSD"
     disk: disk + " GB" # TES
     cpu: cpu
     preemptible: preemptible
@@ -226,7 +226,7 @@ task CalculateUMIsMetrics {
   runtime {
     docker: docker
     memory: "${machine_mem_mb} MiB"
-    disks: "local-disk ${disk} HDD"
+    disks: "local-disk ${disk} SSD"
     disk: disk + " GB" # TES
     cpu: cpu
     preemptible: preemptible
@@ -282,7 +282,7 @@ task FastqMetricsSlideSeq {
     docker: docker
     cpu: cpu
     memory: "${machine_mb} MiB"
-    disks: "local-disk ${disk} HDD"
+    disks: "local-disk ${disk} SSD"
     preemptible: preemptible
   }
 

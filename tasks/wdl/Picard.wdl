@@ -32,7 +32,7 @@ task SortBam {
     runtime {
         docker: docker
         memory: "${machine_mem_mb} MiB"
-        disks: "local-disk ${disk} HDD"
+        disks: "local-disk ${disk} SSD"
         disk: disk + " GB" # TES
         cpu: cpu
         preemptible: preemptible
@@ -77,7 +77,7 @@ task SortBamAndIndex {
     runtime {
         docker: docker
         memory: "${machine_mem_mb} MiB"
-        disks: "local-disk ${disk} HDD"
+        disks: "local-disk ${disk} SSD"
         disk: disk + " GB" # TES
         cpu: cpu
         preemptible: preemptible
@@ -145,7 +145,7 @@ task CollectMultipleMetrics {
   runtime {
     docker: docker
     memory: "${machine_mem_mb} MiB"
-    disks: "local-disk ${disk} HDD"
+    disks: "local-disk ${disk} SSD"
     cpu: cpu
     preemptible: preemptible
     maxRetries: 1
@@ -229,7 +229,7 @@ task CollectMultipleMetricsMultiSample {
     runtime {
         docker: docker
         memory: "${machine_mem_mb} MiB"
-        disks: "local-disk ${disk} HDD"
+        disks: "local-disk ${disk} SSD"
         disk: disk + " GB" # TES
         cpu: cpu
         preemptible: preemptible
@@ -296,7 +296,7 @@ task CollectRnaMetrics {
   runtime {
     docker: docker
     memory: "${machine_mem_mb} MiB"
-    disks: "local-disk ${disk} HDD"
+    disks: "local-disk ${disk} SSD"
     disk: disk + " GB" # TES
     cpu: cpu
     preemptible: preemptible
@@ -354,7 +354,7 @@ task CollectDuplicationMetrics {
   runtime {
     docker: docker
     memory: "${machine_mem_mb} MiB"
-    disks: "local-disk ${disk} HDD"
+    disks: "local-disk ${disk} SSD"
     disk: disk + " GB" # TES
     cpu: cpu
     preemptible: preemptible
@@ -426,7 +426,7 @@ task RemoveDuplicatesFromBam {
   runtime {
     docker: docker
     memory: "${machine_mem_mb} MiB"
-    disks: "local-disk ${disk} HDD"
+    disks: "local-disk ${disk} SSD"
     disk: disk + " GB" # TES
     cpu: cpu
     preemptible: preemptible

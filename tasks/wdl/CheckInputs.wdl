@@ -46,7 +46,7 @@ task checkInputArrays {
     docker: "bashell/alpine-bash@sha256:965a718a07c700a5204c77e391961edee37477634ce2f9cf652a8e4c2db858ff"
     cpu: 1
     memory: "1 GiB"
-    disks: "local-disk ~{disk} HDD"
+    disks: "local-disk ~{disk} SSD"
     disk: disk + " GB" # TES
     maxRetries: 1
   }
@@ -183,7 +183,7 @@ task checkOptimusInput {
     docker: alpine_docker_path
     cpu: cpu
     memory: "~{machine_mem_mb} MiB"
-    disks: "local-disk ~{disk} HDD"
+    disks: "local-disk ~{disk} SSD"
     disk: disk + " GB" # TES
     maxRetries: 1
   } 

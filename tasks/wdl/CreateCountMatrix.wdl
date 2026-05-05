@@ -43,7 +43,7 @@ task CreateSparseCountMatrix {
   runtime {
     docker: docker
     memory: "${machine_mem_mb} MiB"
-    disks: "local-disk ${disk} HDD"
+    disks: "local-disk ${disk} SSD"
     disk: disk + " GB" # TES
     cpu: cpu
     preemptible: preemptible
@@ -96,7 +96,7 @@ task MergeCountFiles {
   runtime {
     docker: docker
     memory: "${machine_mem_mb} MiB"
-    disks: "local-disk ${disk} HDD"
+    disks: "local-disk ${disk} SSD"
     disk: disk + " GB" # TES
     cpu: cpu
     preemptible: preemptible

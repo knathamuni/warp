@@ -42,7 +42,7 @@ task VerifyPipelineInputs {
       docker: docker
       cpu: cpu
       memory: "${memory_mb} MiB"
-      disks: "local-disk ${disk_size_gb} HDD"
+      disks: "local-disk ${disk_size_gb} SSD"
     }
 
     output {
@@ -76,7 +76,7 @@ task SplitCram {
     docker: docker
     cpu: cpu
     memory: "${memory_gb} GB"
-    disks: "local-disk ${disk_size_gb} HDD"
+    disks: "local-disk ${disk_size_gb} SSD"
     maxRetries: max_retries
   }
 
@@ -138,7 +138,7 @@ task ConvertCramOrBamToUBam {
     docker: docker
     cpu: cpu
     memory: "${memory_mb} MiB"
-    disks: "local-disk ${disk_size_gb} HDD"
+    disks: "local-disk ${disk_size_gb} SSD"
     maxRetries: max_retries
     preemptible: preemptible
   }
@@ -253,7 +253,7 @@ task SamToFastqAndBwaMemAndMba {
     docker: docker
     cpu: cpu
     memory: "${memory_mb} MiB"
-    disks: "local-disk ${disk_size_gb} HDD"
+    disks: "local-disk ${disk_size_gb} SSD"
     maxRetries: max_retries
     preemptible: preemptible
   }
@@ -361,7 +361,7 @@ task ExtractSampleNameFlowOrder{
    docker: docker
    cpu : cpu
    memory : "${memory_mb} MiB"
-   disks : "local-disk ${disk_size_gb} HDD"
+   disks : "local-disk ${disk_size_gb} SSD"
    preemptible : preemptible
   }
 
@@ -455,7 +455,7 @@ task CheckContamination {
     docker: docker
     cpu: cpu
     memory: "${memory_mb} MiB"
-    disks: "local-disk ${disk_size_gb} HDD"
+    disks: "local-disk ${disk_size_gb} SSD"
     preemptible: preemptible
     maxRetries: max_retries
   }
@@ -529,7 +529,7 @@ task HaplotypeCaller {
     docker: docker
     cpu: cpu
     memory: "${memory_mb} MiB"
-    disks: "local-disk ${disk_size_gb} HDD"
+    disks: "local-disk ${disk_size_gb} SSD"
     preemptible: preemptible
     maxRetries : max_retries
     continueOnReturnCode: [0,134,139]
@@ -573,7 +573,7 @@ task MergeBams {
     docker: docker
     cpu: cpu
     memory: "${memory_mb} MiB"
-    disks: "local-disk ${disk_size_gb} HDD"
+    disks: "local-disk ${disk_size_gb} SSD"
     preemptible: preemptible
     maxRetries: max_retries
   }
@@ -613,7 +613,7 @@ task ConvertGVCFtoVCF {
     docker: docker
     cpu: cpu
     memory: "${memory_mb} MiB"
-    disks: "local-disk ${disk_size_gb} HDD"
+    disks: "local-disk ${disk_size_gb} SSD"
     preemptible: preemptible
     maxRetries: max_retries
   }
@@ -665,7 +665,7 @@ task FilterVCF {
     docker: docker
     cpu: cpu
     memory: "${memory_mb} MiB"
-    disks: "local-disk ${disk_size_gb} HDD"
+    disks: "local-disk ${disk_size_gb} SSD"
     preemptible: preemptible
   }
 
@@ -724,7 +724,7 @@ task TrainModel {
     docker: docker
     cpu: cpu
     memory: "${memory_mb} MiB"
-    disks: "local-disk ${disk_size_gb} HDD"
+    disks: "local-disk ${disk_size_gb} SSD"
     preemptible: preemptible
   }
 
@@ -765,7 +765,7 @@ task CollectDuplicateMetrics {
     docker: docker
     cpu: cpu
     memory: "${memory_mb} MiB"
-    disks: "local-disk ${disk_size_gb} HDD"
+    disks: "local-disk ${disk_size_gb} SSD"
     preemptible: preemptible
   }
 
@@ -818,7 +818,7 @@ task CollectWgsMetrics {
     docker: docker
     cpu: cpu
     memory: "${memory_mb} MiB"
-    disks: "local-disk ${disk_size_gb} HDD"
+    disks: "local-disk ${disk_size_gb} SSD"
     preemptible: preemptible
   }
 
@@ -870,7 +870,7 @@ task CollectRawWgsMetrics {
     docker: docker
     cpu: cpu
     memory: "${memory_mb} MiB"
-    disks: "local-disk ${disk_size_gb} HDD"
+    disks: "local-disk ${disk_size_gb} SSD"
     preemptible: preemptible
   }
 
@@ -922,7 +922,7 @@ task CollectAggregationMetrics {
     docker: docker
     cpu: cpu
     memory: "${memory_mb} MiB"
-    disks: "local-disk ${disk_size_gb} HDD"
+    disks: "local-disk ${disk_size_gb} SSD"
     preemptible: preemptible
   }
 
@@ -971,7 +971,7 @@ task AnnotateVCF {
     docker: docker
     cpu: cpu
     memory: "${memory_mb} MiB"
-    disks: "local-disk ${disk_size_gb} HDD"
+    disks: "local-disk ${disk_size_gb} SSD"
     preemptible: preemptible
     maxRetries: max_retries
   }
@@ -1021,7 +1021,7 @@ task AddIntervalAnnotationsToVCF {
     docker: docker
     cpu: cpu
     memory: "${memory_mb} MiB"
-    disks: "local-disk ${disk_size_gb} HDD"
+    disks: "local-disk ${disk_size_gb} SSD"
     preemptible: preemptible
   }
 
@@ -1076,7 +1076,7 @@ task AnnotateVCF_AF {
     docker: docker
     cpu: cpu
     memory: "${memory_mb} MiB"
-    disks: "local-disk ${disk_size_gb} HDD"
+    disks: "local-disk ${disk_size_gb} SSD"
     preemptible: preemptible
     maxRetries: max_retries
   }
@@ -1119,6 +1119,6 @@ task MoveAnnotationsToGvcf {
     docker: docker
     cpu: cpu
     memory: "${memory_mb} MiB"
-    disks: "local-disk ${disk_size_gb} HDD"
+    disks: "local-disk ${disk_size_gb} SSD"
   }
 }

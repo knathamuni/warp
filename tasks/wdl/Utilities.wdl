@@ -152,7 +152,7 @@ task ConvertToCram {
     preemptible: preemptible_tries
     memory: "3 GiB"
     cpu: "1"
-    disks: "local-disk " + disk_size + " HDD"
+    disks: "local-disk " + disk_size + " SSD"
     maxRetries: 1
   }
   output {
@@ -184,7 +184,7 @@ task ConvertToBam {
     preemptible: 3
     memory: "3 GiB"
     cpu: "1"
-    disks: "local-disk 200 HDD"
+    disks: "local-disk 200 SSD"
     maxRetries: 1
   }
   output {
@@ -296,7 +296,7 @@ task GetValidationInputs {
     docker: docker
     cpu: cpu
     memory: "~{memory_mb} MiB"
-    disks: "local-disk ~{disk_size_gb} HDD"
+    disks: "local-disk ~{disk_size_gb} SSD"
     maxRetries: 1
   }
 

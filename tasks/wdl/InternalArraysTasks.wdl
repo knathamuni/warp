@@ -127,7 +127,7 @@ task VcfToMercuryFingerprintJson {
 
   runtime {
     docker: "us.gcr.io/broad-arrays-prod/arrays-picard-private:4.1.3-1652895718"
-    disks: "local-disk " + disk_size + " HDD"
+    disks: "local-disk " + disk_size + " SSD"
     memory: "3500 MiB"
     preemptible: preemptible_tries
     maxRetries: 1
@@ -156,7 +156,7 @@ task CreateBafRegressMetricsFile {
   }
   runtime {
     docker: "us.gcr.io/broad-arrays-prod/arrays-picard-private:4.1.3-1652895718"
-    disks: "local-disk " + disk_size + " HDD"
+    disks: "local-disk " + disk_size + " SSD"
     memory: "3500 MiB"
     preemptible: preemptible_tries
     maxRetries: 1
@@ -234,7 +234,7 @@ task UploadArraysMetrics {
 
   runtime {
     docker: "us.gcr.io/broad-arrays-prod/arrays-picard-private:4.1.3-1652895718"
-    disks: "local-disk " + disk_size + " HDD"
+    disks: "local-disk " + disk_size + " SSD"
     memory: "3500 MiB"
     preemptible: preemptible_tries
     maxRetries: 1
@@ -284,7 +284,7 @@ task UploadEmptyArraysMetrics {
 
   runtime {
     docker: "us.gcr.io/broad-arrays-prod/arrays-picard-private:4.1.3-1652895718"
-    disks: "local-disk " + disk_size + " HDD"
+    disks: "local-disk " + disk_size + " SSD"
     memory: "3500 MiB"
     preemptible: preemptible_tries
     maxRetries: 1
@@ -342,7 +342,7 @@ task CreateChipWellBarcodeParamsFile {
 
   runtime {
     docker: "gcr.io/gcp-runtimes/ubuntu_16_0_4@sha256:025124e2f1cf4d29149958f17270596bffe13fc6acca6252977c572dd5ba01bf"
-    disks: "local-disk 10 HDD"
+    disks: "local-disk 10 SSD"
     memory: "2 GiB"
     preemptible: preemptible_tries
     maxRetries: 1
@@ -385,7 +385,7 @@ task UpdateChipWellBarcodeIndex {
 
   runtime {
     docker: "us.gcr.io/broad-arrays-prod/arrays-picard-private:4.1.3-1652895718"
-    disks: "local-disk " + disk_size + " HDD"
+    disks: "local-disk " + disk_size + " SSD"
     memory: "3500 MiB"
     preemptible: preemptible_tries
     maxRetries: 1
@@ -455,7 +455,7 @@ task ResolveExtendedIlluminaManifestFile {
 
   runtime {
     docker: "gcr.io/gcp-runtimes/ubuntu_16_0_4@sha256:025124e2f1cf4d29149958f17270596bffe13fc6acca6252977c572dd5ba01bf"
-    disks: "local-disk 10 HDD"
+    disks: "local-disk 10 SSD"
     memory: "2 GiB"
     preemptible: preemptible_tries
     maxRetries: 1
@@ -491,7 +491,7 @@ task ResolveMinorAlleleFrequencyFile {
 
   runtime {
     docker: "gcr.io/gcp-runtimes/ubuntu_16_0_4@sha256:025124e2f1cf4d29149958f17270596bffe13fc6acca6252977c572dd5ba01bf"
-    disks: "local-disk 10 HDD"
+    disks: "local-disk 10 SSD"
     memory: "2 GiB"
     preemptible: preemptible_tries
     maxRetries: 1

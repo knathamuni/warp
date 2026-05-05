@@ -73,7 +73,7 @@ task HaplotypeCaller_GATK35_GVCF {
     preemptible: preemptible_tries
     memory: "10000 MiB"
     cpu: "1"
-    disks: "local-disk " + disk_size + " HDD"
+    disks: "local-disk " + disk_size + " SSD"
     maxRetries: 1
   }
   output {
@@ -167,7 +167,7 @@ task HaplotypeCaller_GATK4_VCF {
     memory: "~{memory_size_mb} MiB"
     cpu: "2"
     bootDiskSizeGb: 15
-    disks: "local-disk " + disk_size + " HDD"
+    disks: "local-disk " + disk_size + " SSD"
     maxRetries: 1
   }
 
@@ -203,7 +203,7 @@ task MergeVCFs {
     docker: docker
     preemptible: preemptible_tries
     memory: "3000 MiB"
-    disks: "local-disk ~{disk_size} HDD"
+    disks: "local-disk ~{disk_size} SSD"
     maxRetries: 1
   }
   output {
@@ -255,7 +255,7 @@ task Reblock {
 
   runtime {
     memory: "3750 MiB"
-    disks: "local-disk " + disk_size + " HDD"
+    disks: "local-disk " + disk_size + " SSD"
     bootDiskSizeGb: 15
     preemptible: 3
     docker: docker_path
@@ -299,7 +299,7 @@ task HardFilterVcf {
     preemptible: preemptible_tries
     memory: "3000 MiB"
     bootDiskSizeGb: 15
-    disks: "local-disk " + disk_size + " HDD"
+    disks: "local-disk " + disk_size + " SSD"
     maxRetries: 1
   }
 }
@@ -337,7 +337,7 @@ task DragenHardFilterVcf {
     preemptible: preemptible_tries
     memory: "3000 MiB"
     bootDiskSizeGb: 15
-    disks: "local-disk " + disk_size + " HDD"
+    disks: "local-disk " + disk_size + " SSD"
     maxRetries: 1
   }
 }
@@ -388,7 +388,7 @@ task CNNScoreVariants {
     memory: "15000 MiB"
     cpu: "2"
     bootDiskSizeGb: 15
-    disks: "local-disk " + disk_size + " HDD"
+    disks: "local-disk " + disk_size + " SSD"
     maxRetries: 1
   }
 }
@@ -445,7 +445,7 @@ task FilterVariantTranches {
     memory: "7000 MiB"
     cpu: "2"
     bootDiskSizeGb: 15
-    disks: "local-disk " + disk_size + " HDD"
+    disks: "local-disk " + disk_size + " SSD"
     preemptible: preemptible_tries
     docker: gatk_docker
     maxRetries: 1
